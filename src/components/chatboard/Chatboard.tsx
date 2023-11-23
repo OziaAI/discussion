@@ -1,5 +1,13 @@
 import React, { MouseEventHandler } from "react";
-import { Container, Navbar, CloseButton, Row, Col } from "react-bootstrap";
+import {
+	Container,
+	Navbar,
+	Button,
+	CloseButton,
+	Row,
+	Col,
+	Form,
+} from "react-bootstrap";
 import "./Chatboard.css";
 
 function Chatboard(props: {
@@ -14,7 +22,19 @@ function Chatboard(props: {
 				<Navbar.Brand href="#">OziaAI</Navbar.Brand>
 				<CloseButton onClick={props.onCloseClick} />
 			</Navbar>
-			<Container></Container>
+			<Container id="chatboard-discussion">
+				<Row>Test</Row>
+			</Container>
+			<Container fluid>
+				<Row>
+					<Col>
+						<Form.Control type="text" placeholder="Your message" />
+					</Col>
+					<Col>
+						<Button variant="primary">Send</Button>
+					</Col>
+				</Row>
+			</Container>
 		</Container>
 	);
 }
