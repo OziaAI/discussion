@@ -18,6 +18,10 @@ function App() {
 		setDisplayChat(false);
 	};
 
+	// The div containing the custom classes are mandatory for Fade and Collapse
+	// transition to be triggered, see:
+	// https://stackoverflow.com/questions/60510444/react-bootstrap-collapse-not-working-with-custom-components
+
 	return (
 		<div id="app-container">
 			<Fade in={displayChat}>
