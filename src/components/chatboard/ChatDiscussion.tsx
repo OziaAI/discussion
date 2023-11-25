@@ -4,14 +4,18 @@ import Message from "../message/Message";
 
 import "./Chatboard.css";
 
-function ChatDiscussion() {
+function ChatDiscussion(props: {
+	chats: { message: string; sent: boolean }[];
+}) {
 	return (
 		<Container id="chatboard-discussion" className="mt-2">
-			<Message text="Test" sentMessage={true} />
-			<Message
-				text="I am a multiline response coming from Wingman, your shopping Assistant ! Feel free to report any issue !"
-				sentMessage={false}
-			/>
+			{props.chats.map((chat, index) => (
+				<Message
+					key={index}
+					text={chat.message}
+					sentMessage={chat.sent}
+				/>
+			))}
 		</Container>
 	);
 }

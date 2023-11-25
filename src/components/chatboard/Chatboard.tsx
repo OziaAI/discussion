@@ -9,14 +9,20 @@ import ChatControl from "./ChatControl";
 
 function Chatboard(props: {
 	onCloseClick: MouseEventHandler<HTMLButtonElement>;
+	chats: { message: string; sent: boolean }[];
+	onSend: Function;
+	onChangeMessage: React.ChangeEventHandler;
 }) {
 	return (
 		<Container
 			id="chatboard-container"
 			className="d-flex flex-column shadow mb-2 rounded justify-content-between">
 			<ChatNavbar />
-			<ChatDiscussion />
-			<ChatControl />
+			<ChatDiscussion chats={props.chats} />
+			<ChatControl
+				onChangeMessage={props.onChangeMessage}
+				onSend={props.onSend}
+			/>
 		</Container>
 	);
 }
