@@ -1,40 +1,28 @@
 import React, { MouseEventHandler } from "react";
-import {
-	Container,
-	Navbar,
-	Button,
-	CloseButton,
-	Row,
-	Col,
-	Form,
-} from "react-bootstrap";
+import { Container } from "react-bootstrap";
+
 import "./Chatboard.css";
+
+import ChatNavbar from "./ChatNavbar";
+import ChatDiscussion from "./ChatDiscussion";
+import ChatControl from "./ChatControl";
 
 function Chatboard(props: {
 	onCloseClick: MouseEventHandler<HTMLButtonElement>;
+	chats: { message: string; sent: boolean }[];
+	onSend: Function;
+	onChangeMessage: React.ChangeEventHandler;
 }) {
 	return (
-		<Container id="chatboard-container" className="shadow mb-2 rounded">
-			<Navbar
-				className="justify-content-between rounded"
-				bg="primary"
-				data-bs-theme="dark">
-				<Navbar.Brand href="#">OziaAI</Navbar.Brand>
-				<CloseButton onClick={props.onCloseClick} />
-			</Navbar>
-			<Container id="chatboard-discussion">
-				<Row>Test</Row>
-			</Container>
-			<Container fluid>
-				<Row>
-					<Col>
-						<Form.Control type="text" placeholder="Your message" />
-					</Col>
-					<Col>
-						<Button variant="primary">Send</Button>
-					</Col>
-				</Row>
-			</Container>
+		<Container
+			id="chatboard-container"
+			className="d-flex flex-column shadow mb-2 rounded justify-content-between">
+			<ChatNavbar />
+			<ChatDiscussion chats={props.chats} />
+			<ChatControl
+				onChangeMessage={props.onChangeMessage}
+				onSend={props.onSend}
+			/>
 		</Container>
 	);
 }
