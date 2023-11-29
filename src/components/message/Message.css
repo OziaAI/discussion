@@ -1,32 +1,32 @@
 .message-text {
-    align-items: center;
-    display: inline-flex;
-    min-height: 32px;
+	align-items: center;
+	display: inline-flex;
+	min-height: 32px;
 }
 
 .message-sent {
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
-    border-bottom-left-radius: 15px;
-    border-bottom-right-radius: 5px;
-    background-color: black;
-    color: white;
+	border-top-left-radius: 15px;
+	border-top-right-radius: 15px;
+	border-bottom-left-radius: 15px;
+	border-bottom-right-radius: 5px;
+	background-color: black;
+	color: white;
 }
 
 .message-received {
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 15px;
-    background-color: lightgrey;
-    color: dark;
+	border-top-left-radius: 15px;
+	border-top-right-radius: 15px;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 15px;
+	background-color: lightgrey;
+	color: dark;
 }
 
 .message-image {
-    width: 30px;
-    height: 30px;
+	width: 30px;
+	height: 30px;
 }
 
 .message-container {
-    align-items: flex-end;
+	align-items: flex-end;
 }

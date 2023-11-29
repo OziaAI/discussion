@@ -22,7 +22,8 @@ function ChatControl(props: {
 			<Row>
 				<Form
 					onSubmit={onSubmit}
-					className="d-flex justify-content-between">
+					className="d-flex justify-content-between"
+				>
 					<Form.Control
 						type="text"
 						placeholder="Your message"
@@ -32,7 +33,8 @@ function ChatControl(props: {
 					<Button
 						variant="primary"
 						className="ms-2"
-						onClick={onClick}>
+						onClick={onClick}
+					>
 						<FaPaperPlane />
 					</Button>
 				</Form>
