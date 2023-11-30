@@ -2,19 +2,18 @@ import { Container, Button, Row, Col, Form } from "react-bootstrap";
 import { FaPaperPlane } from "react-icons/fa";
 
 import "./Chatboard.css";
-import { FormEvent, MouseEventHandler, MouseEvent } from "react";
+import { FormEvent, MouseEvent, useContext } from "react";
+import { SendMessageContext } from "../../contexts/Contexts";
 
-function ChatControl(props: {
-	onChangeMessage: React.ChangeEventHandler;
-	onSend: Function;
-}) {
+function ChatControl(props: { onChangeMessage: React.ChangeEventHandler }) {
+	const onSend: Function = useContext(SendMessageContext);
 	const onSubmit = (e: FormEvent) => {
 		e.preventDefault();
-		props.onSend();
+		onSend();
 	};
 	const onClick = (e: MouseEvent<HTMLButtonElement>): void => {
 		e.preventDefault();
-		props.onSend();
+		onSend();
 	};
 
 	return (

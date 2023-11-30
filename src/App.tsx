@@ -4,15 +4,22 @@ import "./App.css";
 import MainButton from "./components/main-button/MainButton";
 import Chatboard from "./components/chatboard/Chatboard";
 import { Collapse, Fade } from "react-bootstrap";
+import { Client, createSocket } from "./client/Client";
+import { Chat } from "./types/Chat";
+import { ChatContext, SendMessageContext } from "./contexts/Contexts";
+import { WingmanMessage } from "./types/WingmanMessage";
 
-const client = new WebSocket("ws://127.0.0.1:8000/ws/chat/lobby/");
+const socket: WebSocket = createSocket();
 
 function App() {
-	const [displayChat, setDisplayChat] = useState(false);
+	const [chats, setChats] = useState<Chat[]>([]);
 	const [message, setMessage] = useState("");
-	const [chats, setChats] = useState<{ message: string; sent: boolean }[]>(
-		[],
-	);
+	const [displayChat, setDisplayChat] = useState(false);
+	const [displayControl, setDisplayControl] = useState(true);
+	const [client, setClient] = useState<Client>(new Client(socket));
+	const onChangeMessage = (e: React.ChangeEvent<HTMLInputElement>): void => {
+		setMessage(e.target.value);
+	};
 
 	const mainButtonOnClick = (e: MouseEvent<HTMLButtonElement>): void => {
 		e.preventDefault();
@@ -24,53 +31,63 @@ function App() {
 		setDisplayChat(false);
 	};
 
+	const sendMessage = (msg: string | null = null) => {
+		const input: HTMLInputElement = document.getElementById(
+			"chatboard-input",
+		) as HTMLInputElement;
+		let cleansedChat = cleanse(chats);
+		if (msg === null) client.send(message, cleansedChat, setChats);
+		else client.send(msg, cleansedChat, setChats);
+		setMessage("");
+		input.value = "";
+	};
+
+	const cleanse = (chat: Chat[]): Chat[] => {
+		if (chat.length == 0) return [];
+		chat[chat.length - 1].message.option = null;
+		return chat;
+	};
+
 	const onMessageReceived = function (
 		this: WebSocket,
 		e: MessageEvent<any>,
 	): any {
 		const data = JSON.parse(e.data.toString());
-		setChats(chats.concat([{ message: data.message, sent: false }]));
+		const wingmanMessage: WingmanMessage = {
+			message: data.message,
+			option: data.option || null,
+			context: data.context,
+		};
+		if (wingmanMessage.context.disconnect) {
+			setDisplayControl(false);
+			this.close();
+		}
+		setChats(chats.concat([{ message: wingmanMessage, sent: false }]));
 	};
+	socket.onmessage = onMessageReceived;
 
-	const sendMessage = (): void => {
-		console.log("sendMessage has been called");
-		if (message === "") return;
-		client.send(
-			JSON.stringify({
-				message: message,
-			}),
-		);
-		setChats(chats.concat([{ message: message, sent: true }]));
-		setMessage("");
-		let chatInput = document.getElementById(
-			"chatboard-input",
-		) as HTMLInputElement;
-		chatInput.value = "";
-	};
-
-	const onChangeMessage = (e: React.ChangeEvent<HTMLInputElement>): void => {
-		console.log(e.target.value);
-		setMessage(e.target.value);
-	};
-
-	client.onmessage = onMessageReceived;
 	// The div containing the custom classes are mandatory for Fade and Collapse
 	// transition to be triggered, see:
 	// https://stackoverflow.com/questions/60510444/react-bootstrap-collapse-not-working-with-custom-components
 
 	return (
 		<div id="app-container">
-			<Fade in={displayChat}>
-				<div>
-					<Chatboard
-						onCloseClick={closeButtonOnClick}
-						chats={chats}
-						onSend={sendMessage}
-						onChangeMessage={onChangeMessage}
+			<ChatContext.Provider value={[chats, displayControl]}>
+				<SendMessageContext.Provider value={sendMessage}>
+					<Fade in={displayChat}>
+						<div>
+							<Chatboard
+								onCloseClick={closeButtonOnClick}
+								onChangeMessage={onChangeMessage}
+							/>
+						</div>
+					</Fade>
+					<MainButton
+						onClick={mainButtonOnClick}
+						displayChat={displayChat}
 					/>
-				</div>
-			</Fade>
-			<MainButton onClick={mainButtonOnClick} />
+				</SendMessageContext.Provider>
+			</ChatContext.Provider>
 		</div>
 	);
 }
