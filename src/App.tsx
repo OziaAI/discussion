@@ -12,25 +12,7 @@ import { WingmanMessage } from "./types/WingmanMessage";
 const socket: WebSocket = createSocket();
 
 function App() {
-	const [chats, setChats] = useState<Chat[]>([
-		{
-			message: {
-				message: "Have I answered your questions properly ?",
-				option: {
-					acceptAction: {
-						buttonText: "Yes",
-						messageToSend: "Yes I am satisfied.",
-					},
-					denyAction: {
-						buttonText: "No",
-						messageToSend: "No I am dissatisfied.",
-					},
-					embeddedUrl: null,
-				},
-			},
-			sent: false,
-		},
-	]);
+	const [chats, setChats] = useState<Chat[]>([]);
 	const [message, setMessage] = useState("");
 	const [displayChat, setDisplayChat] = useState(false);
 	const [client, setClient] = useState<Client>(new Client(socket));
@@ -72,7 +54,7 @@ function App() {
 		const data = JSON.parse(e.data.toString());
 		const wingmanMessage: WingmanMessage = {
 			message: data.message,
-			option: null,
+			option: data.option || null,
 		};
 		setChats(chats.concat([{ message: wingmanMessage, sent: false }]));
 	};
