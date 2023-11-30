@@ -15,6 +15,7 @@ function App() {
 	const [chats, setChats] = useState<Chat[]>([]);
 	const [message, setMessage] = useState("");
 	const [displayChat, setDisplayChat] = useState(false);
+	const [displayControl, setDisplayControl] = useState(true);
 	const [client, setClient] = useState<Client>(new Client(socket));
 	const onChangeMessage = (e: React.ChangeEvent<HTMLInputElement>): void => {
 		setMessage(e.target.value);
@@ -55,7 +56,12 @@ function App() {
 		const wingmanMessage: WingmanMessage = {
 			message: data.message,
 			option: data.option || null,
+			context: data.context,
 		};
+		if (wingmanMessage.context.disconnect) {
+			setDisplayControl(false);
+			this.close();
+		}
 		setChats(chats.concat([{ message: wingmanMessage, sent: false }]));
 	};
 	socket.onmessage = onMessageReceived;
@@ -66,7 +72,7 @@ function App() {
 
 	return (
 		<div id="app-container">
-			<ChatContext.Provider value={chats}>
+			<ChatContext.Provider value={[chats, displayControl]}>
 				<SendMessageContext.Provider value={sendMessage}>
 					<Fade in={displayChat}>
 						<div>

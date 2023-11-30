@@ -9,7 +9,12 @@ export type WingmanMessageOption = {
 	denyAction: UserMessageAction | null;
 };
 
+export type WingmanMessageContext = {
+	disconnect: boolean;
+};
+
 export type WingmanMessage = {
 	message: string;
+	context: WingmanMessageContext;
 	option: WingmanMessageOption | null;
 };

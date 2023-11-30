@@ -7,7 +7,7 @@ import { ChatContext } from "../../contexts/Contexts";
 import "./Chatboard.css";
 
 function ChatDiscussion() {
-	const chats = useContext(ChatContext);
+	const [chats, displayControl] = useContext(ChatContext);
 	const bottomRef: MutableRefObject<HTMLDivElement | null> = useRef(null);
 
 	useEffect(() => {

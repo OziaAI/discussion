@@ -26,6 +26,7 @@ export class Client {
 		const wingmanMessage: WingmanMessage = {
 			message: message,
 			option: null,
+			context: { disconnect: false },
 		};
 		setChats(chats.concat([{ message: wingmanMessage, sent: true }]));
 	}
