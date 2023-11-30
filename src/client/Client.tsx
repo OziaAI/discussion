@@ -1,14 +1,12 @@
 import { WingmanMessage } from "../types/WingmanMessage";
-import { Chat } from "../types/Chat";
+import { Chat, ChatSetter } from "../types/Chat";
 import React from "react";
-
-type ChatSetter = React.Dispatch<React.SetStateAction<Chat[]>>;
 
 export const createSocket = (): WebSocket => {
 	let api_path =
 		process.env.NODE_ENV === "production"
 			? "wss://api.s3l4h.com"
-			: "ws://121.0.0.0:8080";
+			: "ws://127.0.0.1:8000";
 
 	let socket: WebSocket = new WebSocket(`${api_path}/ws/chat/lobby/`);
 	return socket;
@@ -21,8 +19,7 @@ export class Client {
 		this.socket = socket;
 	}
 
-	send(message: string, chats: Chat[],
-	setChats: React.Dispatch<React.SetStateAction<Chat[]>>) {
+	send(message: string, chats: Chat[], setChats: ChatSetter) {
 		if (message === "" || message === undefined) return;
 
 		this.socket.send(JSON.stringify({ message: message }));
@@ -30,8 +27,6 @@ export class Client {
 			message: message,
 			option: null,
 		};
-		setChats(
-			chats.concat([{ message: wingmanMessage, sent: true }]),
-		);
+		setChats(chats.concat([{ message: wingmanMessage, sent: true }]));
 	}
 }

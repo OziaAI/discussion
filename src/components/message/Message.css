@@ -30,3 +30,12 @@
 .message-container {
 	align-items: flex-end;
 }
+
+.button-container {
+	margin-left: calc(30px + .5rem);
+}
+
+.button-option {
+	width: 100%;
+	border-radius: 15px !important;
+}

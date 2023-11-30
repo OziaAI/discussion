@@ -8,14 +8,12 @@ function ChatNavbar() {
 		<Navbar
 			className="justify-content-between shadow rounded"
 			bg="primary"
-			data-bs-theme="dark"
-		>
+			data-bs-theme="dark">
 			<Navbar.Brand href="#" className="ms-3">
 				<Image
 					className="d-inline-block align-top me-1"
 					roundedCircle
-					src={logo}
-				></Image>
+					src={logo}></Image>
 				OziaAI
 			</Navbar.Brand>
 		</Navbar>

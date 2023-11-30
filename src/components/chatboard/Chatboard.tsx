@@ -9,20 +9,15 @@ import "./Chatboard.css";
 
 function Chatboard(props: {
 	onCloseClick: MouseEventHandler<HTMLButtonElement>;
-	onSend: Function;
 	onChangeMessage: React.ChangeEventHandler;
 }) {
 	return (
 		<Container
 			id="chatboard-container"
-			className="d-flex flex-column shadow mb-2 rounded justify-content-between"
-		>
+			className="d-flex flex-column shadow mb-2 rounded justify-content-between">
 			<ChatNavbar />
 			<ChatDiscussion />
-			<ChatControl
-				onChangeMessage={props.onChangeMessage}
-				onSend={props.onSend}
-			/>
+			<ChatControl onChangeMessage={props.onChangeMessage} />
 		</Container>
 	);
 }

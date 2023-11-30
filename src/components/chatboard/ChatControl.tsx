@@ -2,19 +2,18 @@ import { Container, Button, Row, Col, Form } from "react-bootstrap";
 import { FaPaperPlane } from "react-icons/fa";
 
 import "./Chatboard.css";
-import { FormEvent, MouseEventHandler, MouseEvent } from "react";
+import { FormEvent, MouseEvent, useContext } from "react";
+import { SendMessageContext } from "../../contexts/Contexts";
 
-function ChatControl(props: {
-	onChangeMessage: React.ChangeEventHandler;
-	onSend: Function;
-}) {
+function ChatControl(props: { onChangeMessage: React.ChangeEventHandler }) {
+	const onSend: Function = useContext(SendMessageContext);
 	const onSubmit = (e: FormEvent) => {
 		e.preventDefault();
-		props.onSend();
+		onSend();
 	};
 	const onClick = (e: MouseEvent<HTMLButtonElement>): void => {
 		e.preventDefault();
-		props.onSend();
+		onSend();
 	};
 
 	return (
@@ -22,8 +21,7 @@ function ChatControl(props: {
 			<Row>
 				<Form
 					onSubmit={onSubmit}
-					className="d-flex justify-content-between"
-				>
+					className="d-flex justify-content-between">
 					<Form.Control
 						type="text"
 						placeholder="Your message"
@@ -33,8 +31,7 @@ function ChatControl(props: {
 					<Button
 						variant="primary"
 						className="ms-2"
-						onClick={onClick}
-					>
+						onClick={onClick}>
 						<FaPaperPlane />
 					</Button>
 				</Form>
