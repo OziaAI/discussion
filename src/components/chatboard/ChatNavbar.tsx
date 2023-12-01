@@ -14,7 +14,7 @@ function ChatNavbar() {
 					className="d-inline-block align-top me-1"
 					roundedCircle
 					src={logo}></Image>
-				OziaAI
+				Ozia
 			</Navbar.Brand>
 		</Navbar>
 	);
