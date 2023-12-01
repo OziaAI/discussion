@@ -1,5 +1,7 @@
 import React, { MouseEventHandler, useContext } from "react";
-import { Container } from "react-bootstrap";
+import { Container, Row, Image } from "react-bootstrap";
+
+import robot from "../../images/logo32.png";
 
 import ChatNavbar from "./ChatNavbar";
 import ChatDiscussion from "./ChatDiscussion";
@@ -20,12 +22,20 @@ function Chatboard(props: {
 			<ChatNavbar />
 			<ChatDiscussion />
 			{!displayControl ? (
-				<p className="text-center fst-italic fs-6">
+				<p id="conversation-end" className="text-center fst-italic">
 					End of conversation.
 				</p>
 			) : (
 				<ChatControl onChangeMessage={props.onChangeMessage} />
 			)}
+			<p className="text-end me-3">
+				<span className="powered-by">Powered by</span>
+				<Image
+					src={robot}
+					className={"logo-image mx-2"}
+					roundedCircle></Image>
+				<strong>OziaAI</strong>
+			</p>
 		</Container>
 	);
 }
