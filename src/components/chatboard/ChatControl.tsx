@@ -3,10 +3,15 @@ import { FaPaperPlane } from "react-icons/fa";
 
 import "./Chatboard.css";
 import { FormEvent, MouseEvent, useContext } from "react";
-import { SendMessageContext } from "../../contexts/Contexts";
+import {
+	ChatContext,
+	ControlContext,
+	SendMessageContext,
+} from "../../contexts/Contexts";
 
 function ChatControl(props: { onChangeMessage: React.ChangeEventHandler }) {
 	const onSend: Function = useContext(SendMessageContext);
+	const [disableControl, setDisableControl] = useContext(ControlContext);
 	const onSubmit = (e: FormEvent) => {
 		e.preventDefault();
 		onSend();
@@ -24,14 +29,16 @@ function ChatControl(props: { onChangeMessage: React.ChangeEventHandler }) {
 					className="d-flex justify-content-between">
 					<Form.Control
 						type="text"
-						placeholder="Your message"
+						placeholder={!disableControl ? "Your message" : ""}
 						id="chatboard-input"
 						onChange={props.onChangeMessage}
+						disabled={disableControl}
 					/>
 					<Button
 						variant="primary"
 						className="ms-2"
-						onClick={onClick}>
+						onClick={onClick}
+						disabled={disableControl}>
 						<FaPaperPlane />
 					</Button>
 				</Form>

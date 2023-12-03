@@ -6,17 +6,22 @@ import Chatboard from "./components/chatboard/Chatboard";
 import { Collapse, Fade } from "react-bootstrap";
 import { Client, createSocket } from "./client/Client";
 import { Chat } from "./types/Chat";
-import { ChatContext, SendMessageContext } from "./contexts/Contexts";
+import {
+	ChatContext,
+	ControlContext,
+	SendMessageContext,
+} from "./contexts/Contexts";
 import { WingmanMessage } from "./types/WingmanMessage";
 
-const socket: WebSocket = createSocket();
+let socket: WebSocket | null = createSocket();
+let client: Client = new Client(socket);
 
 function App() {
 	const [chats, setChats] = useState<Chat[]>([]);
 	const [message, setMessage] = useState("");
 	const [displayChat, setDisplayChat] = useState(false);
-	const [displayControl, setDisplayControl] = useState(true);
-	const [client, setClient] = useState<Client>(new Client(socket));
+	const [disableControl, setDisableControl] = useState(false);
+
 	const onChangeMessage = (e: React.ChangeEvent<HTMLInputElement>): void => {
 		setMessage(e.target.value);
 	};
@@ -35,9 +40,9 @@ function App() {
 		const input: HTMLInputElement = document.getElementById(
 			"chatboard-input",
 		) as HTMLInputElement;
+
 		let cleansedChat = cleanse(chats);
-		if (msg === null) client.send(message, cleansedChat, setChats);
-		else client.send(msg, cleansedChat, setChats);
+		client.send(msg === null ? message : msg, cleansedChat, setChats);
 		setMessage("");
 		input.value = "";
 	};
@@ -58,35 +63,50 @@ function App() {
 			option: data.option || null,
 			context: data.context,
 		};
-		if (wingmanMessage.context.disconnect) {
-			setDisplayControl(false);
-			this.close();
-		}
 		setChats(chats.concat([{ message: wingmanMessage, sent: false }]));
+		if (wingmanMessage.context.disconnect) {
+			setDisableControl(true);
+			controlDiscussion(false);
+		}
 	};
-	socket.onmessage = onMessageReceived;
+	if (socket !== null) socket.onmessage = onMessageReceived;
+
+	const controlDiscussion = (open: boolean) => {
+		if (open) {
+			socket = createSocket();
+			client = new Client(socket);
+			setDisableControl(false);
+			setChats([]);
+		} else {
+			if (socket !== null) socket.close();
+			socket = null;
+			client = new Client(null);
+		}
+	};
 
 	// The div containing the custom classes are mandatory for Fade and Collapse
 	// transition to be triggered, see:
 	// https://stackoverflow.com/questions/60510444/react-bootstrap-collapse-not-working-with-custom-components
-
 	return (
 		<div id="app-container">
-			<ChatContext.Provider value={[chats, displayControl]}>
-				<SendMessageContext.Provider value={sendMessage}>
-					<Fade in={displayChat}>
-						<div>
-							<Chatboard
-								onCloseClick={closeButtonOnClick}
-								onChangeMessage={onChangeMessage}
-							/>
-						</div>
-					</Fade>
-					<MainButton
-						onClick={mainButtonOnClick}
-						displayChat={displayChat}
-					/>
-				</SendMessageContext.Provider>
+			<ChatContext.Provider value={chats}>
+				<ControlContext.Provider
+					value={[disableControl, controlDiscussion]}>
+					<SendMessageContext.Provider value={sendMessage}>
+						<Fade in={displayChat}>
+							<div>
+								<Chatboard
+									onCloseClick={closeButtonOnClick}
+									onChangeMessage={onChangeMessage}
+								/>
+							</div>
+						</Fade>
+						<MainButton
+							onClick={mainButtonOnClick}
+							displayChat={displayChat}
+						/>
+					</SendMessageContext.Provider>
+				</ControlContext.Provider>
 			</ChatContext.Provider>
 		</div>
 	);
