@@ -7,7 +7,7 @@ import { ChatContext } from "../../contexts/Contexts";
 import "./Chatboard.css";
 
 function ChatDiscussion() {
-	const [chats, displayControl] = useContext(ChatContext);
+	const chats = useContext(ChatContext);
 	const bottomRef: MutableRefObject<HTMLDivElement | null> = useRef(null);
 
 	useEffect(() => {
@@ -21,6 +21,7 @@ function ChatDiscussion() {
 					key={index}
 					message={chat.message}
 					sentMessage={chat.sent}
+					isLast={index + 1 === chats.length}
 				/>
 			))}
 			<div ref={bottomRef}></div>

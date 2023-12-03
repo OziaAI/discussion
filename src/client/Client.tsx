@@ -13,13 +13,14 @@ export const createSocket = (): WebSocket => {
 };
 
 export class Client {
-	socket: WebSocket;
+	socket: WebSocket | null;
 
-	constructor(socket: WebSocket) {
+	constructor(socket: WebSocket | null) {
 		this.socket = socket;
 	}
 
 	send(message: string, chats: Chat[], setChats: ChatSetter) {
+		if (this.socket === null) return;
 		if (message === "" || message === undefined) return;
 
 		this.socket.send(JSON.stringify({ message: message }));

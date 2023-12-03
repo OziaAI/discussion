@@ -9,10 +9,15 @@ import {
 	WingmanMessageOption,
 } from "../../types/WingmanMessage";
 import { useContext } from "react";
-import { SendMessageContext } from "../../contexts/Contexts";
+import { ControlContext, SendMessageContext } from "../../contexts/Contexts";
 
-function Message(props: { message: WingmanMessage; sentMessage: boolean }) {
+function Message(props: {
+	message: WingmanMessage;
+	sentMessage: boolean;
+	isLast: boolean;
+}) {
 	const onSend: Function = useContext(SendMessageContext);
+	const [disableControl, controlDiscussion] = useContext(ControlContext);
 	const messageOption = () => {
 		let option: WingmanMessageOption | null = props.message.option;
 		if (option === null) return <></>;
@@ -76,6 +81,31 @@ function Message(props: { message: WingmanMessage; sentMessage: boolean }) {
 					roundedCircle></Image>
 			</Container>
 			{messageOption()}
+			{disableControl || props.message.context.disconnect ? (
+				<Container className="d-flex flex-column mt-2">
+					{props.message.context.disconnect ? (
+						<p
+							id="conversation-end"
+							className="text-center fst-italic m-0">
+							End of conversation.
+						</p>
+					) : (
+						<></>
+					)}
+					{disableControl && props.isLast ? (
+						<Button
+							variant="primary"
+							className="mx-auto"
+							onClick={() => controlDiscussion(true)}>
+							Start new conversation
+						</Button>
+					) : (
+						<></>
+					)}
+				</Container>
+			) : (
+				<></>
+			)}
 		</Container>
 	);
 }
