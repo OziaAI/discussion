@@ -1,0 +1,17 @@
+# build environment
+FROM node:21-alpine3.17 as build
+WORKDIR /app
+
+ENV PATH /app/node_modules/.bin:$PATH
+
+# Since you will need to mount the entire repository
+# There is no need to copy files
+# We can just launch the installation of npm packages
+# This will create node_module folder inside your local filesystem 
+
+RUN npm ci --silent
+RUN npm install
+
+EXPOSE 3000
+
+ENTRYPOINT ["npm", "start"]
