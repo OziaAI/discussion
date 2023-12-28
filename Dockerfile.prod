@@ -1,5 +1,7 @@
 # build environment
 FROM node:21-alpine3.17 as build
+ARG BACKEND_PATH
+ENV REACT_APP_BACKEND_PATH $BACKEND_PATH
 WORKDIR /app
 ENV PATH /app/node_modules/.bin:$PATH
 COPY package.json ./

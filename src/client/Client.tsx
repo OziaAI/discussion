@@ -3,10 +3,10 @@ import { Chat, ChatSetter } from "../types/Chat";
 import React from "react";
 
 export const createSocket = (): WebSocket => {
-	let api_path =
-		process.env.NODE_ENV === "production"
-			? "wss://api.s3l4h.com"
-			: "ws://127.0.0.1:8000";
+        let api_path = 
+                process.env.BACKEND_PATH !== undefined
+                    ? process.env.BACKEND_PATH
+                    : "ws://localhost:8000";
 
 	let socket: WebSocket = new WebSocket(`${api_path}/ws/chat/lobby/`);
 	return socket;
