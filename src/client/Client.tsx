@@ -4,8 +4,8 @@ import React from "react";
 
 export const createSocket = (): WebSocket => {
         let api_path = 
-                process.env.BACKEND_PATH !== undefined
-                    ? process.env.BACKEND_PATH
+                process.env.REACT_APP_BACKEND_PATH !== undefined
+                    ? process.env.REACT_APP_BACKEND_PATH
                     : "ws://localhost:8000";
 
 	let socket: WebSocket = new WebSocket(`${api_path}/ws/chat/lobby/`);
