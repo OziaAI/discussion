@@ -92,7 +92,9 @@ function App() {
 	// transition to be triggered, see:
 	// https://stackoverflow.com/questions/60510444/react-bootstrap-collapse-not-working-with-custom-components
 	return (
-		<div id="app-container">
+		<div
+			id="app-container"
+			className={displayChat ? "app-container-expanded" : ""}>
 			<ChatContext.Provider value={chats}>
 				<ControlContext.Provider
 					value={[disableControl, controlDiscussion]}>
