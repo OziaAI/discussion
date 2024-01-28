@@ -2,16 +2,20 @@ import React, { useState, MouseEvent } from "react";
 import "./App.css";
 
 import MainButton from "./components/main-button/MainButton";
+import Presenter from "./components/presenter/Presenter";
 import Chatboard from "./components/chatboard/Chatboard";
-import { Collapse, Fade } from "react-bootstrap";
 import { Client, createSocket } from "./client/Client";
 import { Chat } from "./types/Chat";
 import {
 	ChatContext,
 	ControlContext,
+	DisplayContext,
 	SendMessageContext,
 } from "./contexts/Contexts";
 import { WingmanMessage } from "./types/WingmanMessage";
+
+import "@fontsource/inter";
+import "@fontsource/inter/700.css";
 
 let socket: WebSocket | null = createSocket();
 let client: Client = new Client(socket);
@@ -48,7 +52,7 @@ function App() {
 	};
 
 	const cleanse = (chat: Chat[]): Chat[] => {
-		if (chat.length == 0) return [];
+		if (chat.length === 0) return [];
 		chat[chat.length - 1].message.option = null;
 		return chat;
 	};
@@ -92,20 +96,24 @@ function App() {
 			<ChatContext.Provider value={chats}>
 				<ControlContext.Provider
 					value={[disableControl, controlDiscussion]}>
-					<SendMessageContext.Provider value={sendMessage}>
-						<Fade in={displayChat}>
-							<div>
+					<DisplayContext.Provider
+						value={[displayChat, setDisplayChat]}>
+						<SendMessageContext.Provider value={sendMessage}>
+							<Presenter
+								active={displayChat}
+								button={
+									<MainButton
+										onClick={mainButtonOnClick}
+										displayChat={displayChat}
+									/>
+								}>
 								<Chatboard
 									onCloseClick={closeButtonOnClick}
 									onChangeMessage={onChangeMessage}
 								/>
-							</div>
-						</Fade>
-						<MainButton
-							onClick={mainButtonOnClick}
-							displayChat={displayChat}
-						/>
-					</SendMessageContext.Provider>
+							</Presenter>
+						</SendMessageContext.Provider>
+					</DisplayContext.Provider>
 				</ControlContext.Provider>
 			</ChatContext.Provider>
 		</div>

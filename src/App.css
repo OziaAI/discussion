@@ -1,6 +1,5 @@
 #app-container {
 	position: fixed;
-	bottom: 0;
-	left: 0;
-	margin: 20px 10px;
+	bottom: calc(2 * var(--padding-size-0));
+	left: var(--padding-size-1);
 }

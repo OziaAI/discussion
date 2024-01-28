@@ -1,12 +1,11 @@
 import { WingmanMessage } from "../types/WingmanMessage";
 import { Chat, ChatSetter } from "../types/Chat";
-import React from "react";
 
 export const createSocket = (): WebSocket => {
-        let api_path = 
-                process.env.REACT_APP_BACKEND_PATH !== undefined
-                    ? process.env.REACT_APP_BACKEND_PATH
-                    : "ws://localhost:8000";
+	let api_path =
+		process.env.REACT_APP_BACKEND_PATH !== undefined
+			? process.env.REACT_APP_BACKEND_PATH
+			: "ws://localhost:8000";
 
 	let socket: WebSocket = new WebSocket(`${api_path}/ws/chat/lobby/`);
 	return socket;

@@ -1,10 +1,9 @@
 import { MutableRefObject, useContext, useEffect, useRef } from "react";
-import { Container } from "react-bootstrap";
 
-import Message from "../message/Message";
-import { ChatContext } from "../../contexts/Contexts";
+import Message from "../../message/Message";
+import { ChatContext } from "../../../contexts/Contexts";
 
-import "./Chatboard.css";
+import "./ChatDiscussion.css";
 
 function ChatDiscussion() {
 	const chats = useContext(ChatContext);
@@ -15,7 +14,7 @@ function ChatDiscussion() {
 	}, [chats]);
 
 	return (
-		<Container id="chatboard-discussion" className="mt-2">
+		<div id="chatboard-discussion">
 			{chats.map((chat, index) => (
 				<Message
 					key={index}
@@ -25,7 +24,7 @@ function ChatDiscussion() {
 				/>
 			))}
 			<div ref={bottomRef}></div>
-		</Container>
+		</div>
 	);
 }
 export default ChatDiscussion;

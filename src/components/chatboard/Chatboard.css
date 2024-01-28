@@ -1,28 +1,14 @@
 #chatboard-container {
-	width: 500px;
+	width: 400px;
 	height: 700px;
-	padding: 0;
-}
 
-#chatboard-discussion {
-	height: 100%;
-	overflow-y: scroll;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	border-radius: var(--border-radius-1);
+
+	box-shadow: var(--box-shadow-2);
 }
 
 #chatboard-control {
-	border-top: 1px solid #eeeeee;
-	padding-top: 10px;
-	margin-bottom: 10px;
-}
-
-.logo-image {
-	width: 20px;
-	height: 20px;
-}
-
-.powered-by {
-	color: grey;
-	font-style: italic;
-	font-size: small;
-
 }
