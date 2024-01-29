@@ -14,9 +14,6 @@ import {
 } from "./contexts/Contexts";
 import { WingmanMessage } from "./types/WingmanMessage";
 
-import "@fontsource/inter";
-import "@fontsource/inter/700.css";
-
 let socket: WebSocket | null = createSocket();
 let client: Client = new Client(socket);
 
