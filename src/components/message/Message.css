@@ -1,7 +1,6 @@
 .message-text {
 	align-items: center;
 	display: inline-flex;
-	min-height: 32px;
 	width: 100%;
 	padding: var(--padding-size-2) var(--padding-size-1);
 }
@@ -109,4 +108,12 @@
 	flex-direction: column;
 	margin-top: var(--padding-size-1);
 
+}
+
+.message-image-me {
+	margin-left: var(--padding-size-1);
+}
+
+.message-image-them {
+	margin-right: var(--padding-size-1);
 }

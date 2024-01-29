@@ -71,7 +71,10 @@ function Message(props: {
 					src={props.sentMessage ? profile : robot}
 					alt="profile pic"
 					className={
-						"message-image " + (props.sentMessage ? "ms-2" : "me-2")
+						"message-image " +
+						(props.sentMessage
+							? "message-image-me"
+							: "message-image-them")
 					}></img>
 			</div>
 			{messageOption()}
