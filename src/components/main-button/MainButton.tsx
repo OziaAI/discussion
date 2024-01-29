@@ -1,6 +1,5 @@
 import React, { MouseEventHandler, useState } from "react";
 import "./MainButton.css";
-import { Button } from "react-bootstrap";
 import { FaComment, FaPen, FaRegTimesCircle } from "react-icons/fa";
 
 function MainButton(props: {
@@ -14,21 +13,15 @@ function MainButton(props: {
 	const onLeave = () => {
 		setButtonHovered(false);
 	};
-
-	const selectContentButton = () => {
-		if (props.displayChat) return <FaRegTimesCircle />;
-		if (buttonHovered) return <FaPen />;
-		return <FaComment />;
-	};
 	return (
-		<Button
-			variant={props.displayChat ? "primary" : "outline-primary"}
-			size="lg"
+		<button
+			className="main-button"
 			onClick={props.onClick}
 			onMouseOver={onHover}
-			onMouseLeave={onLeave}>
-			{selectContentButton()}
-		</Button>
+			onMouseLeave={onLeave}
+		>
+			<FaComment />
+		</button>
 	);
 }
 export default MainButton;

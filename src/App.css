@@ -1,6 +1,50 @@
 #app-container {
 	position: fixed;
-	bottom: 0;
-	left: 0;
-	margin: 20px 10px;
+	bottom: var(--padding-size-1);
+	left: var(--padding-size-1);
+	z-index: 10 !important;
+}
+
+.app-container-expanded {
+	bottom: var(--padding-size-1) !important;
+	animation: 1s slideup;
+}
+
+.app-container-collapsed {
+	bottom: var(--padding-size-1) !important;
+	animation: 1s slidedown;
+}
+
+@media screen and (max-width: 420px) {
+	.app-container-expanded {
+		bottom: 0 !important;
+		left: 0 !important;
+		right: 0 !important;
+		top: 0 !important;
+	}
+
+	.app-container-collapsed {
+		bottom: 0 !important;
+		left: 0 !important;
+		right: 0 !important;
+		top: 0 !important;
+	}
+}
+
+@keyframes slideup {
+	from {
+		transform: translateY(100%);
+	}
+	to {
+		transform: translateY(0%);
+	}
+}
+
+@keyframes slidedown {
+	from {
+		transform: translateY(0%);
+	}
+	to {
+		transform: translateY(100%);
+	}
 }

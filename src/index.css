@@ -1,13 +1,65 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
+
 body {
 	margin: 0;
-	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
-		"Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
-		"Helvetica Neue", sans-serif;
+	font-family: "Inter", Verdana;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+
+	font-optical-sizing: auto;
+	font-style: normal;
+	font-variation-settings: "slnt" 0;
+
+	/* properties to fix spotify idiots css */
+	letter-spacing: unset !important;
+	line-height: unset !important;
 }
 
 * {
 	margin: 0;
 	padding: 0;
+}
+
+/* prevents zoom when clicking on input on mobile phone:
+https://stackoverflow.com/questions/2989263/disable-auto-zoom-in-input-text-tag-safari-on-iphone/47590496 */
+@media screen and (max-width: 599px) {
+	input,
+	select,
+	textarea {
+		font-size: 16px !important;
+	}
+}
+
+:root {
+	/* background colors */
+	--primary-color-1: #3fa7d6;
+	--primary-color-2: #9ad0ea;
+	--primary-color-3: #eeeeee;
+	--primary-color-4: #278bb9;
+
+	--message-color-me: #3fa7d6; /*#248bf5;*/ /* iMessage color */
+	--message-color-them: #e5e5ea;
+
+	/* foreground colors */
+	--secondary-color-1: white;
+
+	/* padding sizes */
+	--padding-size-0: 20px;
+	--padding-size-1: 10px;
+	--padding-size-2: 5px;
+
+	--border-radius-1: 10px;
+	--border-radius-2: 5px;
+
+	--box-shadow-1: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+	--box-shadow-2: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+		rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+
+	--primary-satisfied-color: #157f1f;
+	--primary-dissatisfied-color: #c44536;
+	--secondary-satisfied-color: #157f1f;
+	--secondary-dissatisfied-color: #c44536;
+
+	--hovered-satisfied-color: #1a9e27;
+	--hovered-dissatisfied-color: #cf5c4f;
 }

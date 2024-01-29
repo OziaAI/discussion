@@ -2,13 +2,14 @@ import React, { useState, MouseEvent } from "react";
 import "./App.css";
 
 import MainButton from "./components/main-button/MainButton";
+import Presenter from "./components/presenter/Presenter";
 import Chatboard from "./components/chatboard/Chatboard";
-import { Collapse, Fade } from "react-bootstrap";
 import { Client, createSocket } from "./client/Client";
 import { Chat } from "./types/Chat";
 import {
 	ChatContext,
 	ControlContext,
+	DisplayContext,
 	SendMessageContext,
 } from "./contexts/Contexts";
 import { WingmanMessage } from "./types/WingmanMessage";
@@ -20,6 +21,7 @@ function App() {
 	const [chats, setChats] = useState<Chat[]>([]);
 	const [message, setMessage] = useState("");
 	const [displayChat, setDisplayChat] = useState(false);
+	const [closingAnimation, setClosingAnimation] = useState(false);
 	const [disableControl, setDisableControl] = useState(false);
 
 	const onChangeMessage = (e: React.ChangeEvent<HTMLInputElement>): void => {
@@ -48,7 +50,7 @@ function App() {
 	};
 
 	const cleanse = (chat: Chat[]): Chat[] => {
-		if (chat.length == 0) return [];
+		if (chat.length === 0) return [];
 		chat[chat.length - 1].message.option = null;
 		return chat;
 	};
@@ -84,28 +86,57 @@ function App() {
 		}
 	};
 
+	const controlDisplayChat = (value: boolean) => {
+		if (value === true) {
+			setDisplayChat(value);
+			return;
+		}
+
+		setTimeout(() => {
+			setDisplayChat(value);
+			setClosingAnimation(false);
+		}, 1000);
+		setClosingAnimation(true);
+	};
+
 	// The div containing the custom classes are mandatory for Fade and Collapse
 	// transition to be triggered, see:
 	// https://stackoverflow.com/questions/60510444/react-bootstrap-collapse-not-working-with-custom-components
 	return (
-		<div id="app-container">
+		<div
+			id="app-container"
+			className={
+				closingAnimation
+					? "app-container-collapsed"
+					: displayChat
+					? "app-container-expanded"
+					: ""
+			}
+		>
 			<ChatContext.Provider value={chats}>
 				<ControlContext.Provider
-					value={[disableControl, controlDiscussion]}>
-					<SendMessageContext.Provider value={sendMessage}>
-						<Fade in={displayChat}>
-							<div>
+					value={[disableControl, controlDiscussion]}
+				>
+					<DisplayContext.Provider
+						value={[displayChat, controlDisplayChat]}
+					>
+						<SendMessageContext.Provider value={sendMessage}>
+							<Presenter
+								active={displayChat}
+								button={
+									<MainButton
+										onClick={mainButtonOnClick}
+										displayChat={displayChat}
+									/>
+								}
+							>
 								<Chatboard
 									onCloseClick={closeButtonOnClick}
 									onChangeMessage={onChangeMessage}
 								/>
-							</div>
-						</Fade>
-						<MainButton
-							onClick={mainButtonOnClick}
-							displayChat={displayChat}
-						/>
-					</SendMessageContext.Provider>
+							</Presenter>
+						</SendMessageContext.Provider>
+					</DisplayContext.Provider>
 				</ControlContext.Provider>
 			</ChatContext.Provider>
 		</div>

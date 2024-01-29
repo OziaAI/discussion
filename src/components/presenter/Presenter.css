@@ -1,0 +1,35 @@
+.presenter {
+	transition:
+		max-width 0.5s,
+		max-height 0.5s;
+	padding: 0;
+	margin: 0;
+	background-color: white;
+}
+
+.presenter-expanded {
+	transition:
+		max-width 0s,
+		max-height 0.5s;
+	max-width: 500px;
+	max-height: 700px;
+	border-radius: var(--border-radius-1);
+}
+
+.presenter-collapsed {
+	max-width: 100px;
+	max-height: 100px;
+	animation: 1s slideup;
+}
+
+@media screen and (max-width: 420px) {
+	.presenter-expanded {
+		max-width: 100vw;
+		max-height: 100vh;
+		width: 100vw;
+		height: calc(var(--vh, 1vh) * 100);
+
+		border-top-left-radius: 0;
+		border-top-right-radius: 0;
+	}
+}
