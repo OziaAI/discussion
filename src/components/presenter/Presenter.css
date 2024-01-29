@@ -12,8 +12,8 @@
 }
 
 .presenter-collapsed {
-    max-width: 50px;
-    max-height: 50px;
+    max-width: 100px;
+    max-height: 100px;
 }
 
 @media screen and (max-width: 420px) {

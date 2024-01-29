@@ -20,9 +20,7 @@ function ChatControl(props: { onChangeMessage: React.ChangeEventHandler }) {
 
 	return (
 		<div id="chatboard-control">
-			<form
-				onSubmit={onSubmit}
-				className="d-flex justify-content-between">
+			<form onSubmit={onSubmit} className="chatboard-control-form">
 				<input
 					type="text"
 					placeholder={!disableControl ? "Your message" : ""}

@@ -9,8 +9,8 @@
 #chatboard-input {
     border-radius: var(--border-radius-2);
     border: 1px solid lightgrey;
-    width: 100%;
-    padding: 0 var(--padding-size-1);
+    padding: .5rem var(--padding-size-1);
+    flex: 1 0 0%;
 }
 
 #chatboard-input:disabled {
@@ -43,13 +43,16 @@
 
 .send-button {
     background-color: var(--primary-color-1);
-    padding: var(--padding-size-2) 12px;
+    padding: .5rem 12px;
     margin-left: var(--padding-size-1);
     border: transparent;
     border-radius: var(--border-radius-2);
 
 	color: white;
 	transition: background-color 0.3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .send-button:hover {
@@ -59,4 +62,9 @@
 .send-button:disabled {
     background-color: var(--primary-color-2);
 
+}
+
+.chatboard-control-form {
+    display: flex;
+    justify-content: space-between;
 }

@@ -1,7 +1,11 @@
 #app-container {
 	position: fixed;
-	bottom: calc(2 * var(--padding-size-0));
+	bottom: var(--padding-size-1);
 	left: var(--padding-size-1);
+}
+
+.app-container-expanded {
+	bottom: var(--padding-size-1) !important;
 }
 
 
