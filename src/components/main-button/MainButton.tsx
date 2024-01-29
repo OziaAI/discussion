@@ -7,20 +7,34 @@ function MainButton(props: {
 	displayChat: boolean;
 }) {
 	const [buttonHovered, setButtonHovered] = useState(false);
+	const [buttonLeft, setButtonLeft] = useState(false);
 	const onHover = () => {
 		setButtonHovered(true);
 	};
 	const onLeave = () => {
-		setButtonHovered(false);
+		setButtonLeft(true);
+		setTimeout(() => {
+			setButtonHovered(false);
+			setButtonLeft(false);
+		}, 500);
 	};
 	return (
 		<button
 			className="main-button"
 			onClick={props.onClick}
 			onMouseOver={onHover}
-			onMouseLeave={onLeave}
-		>
-			<FaComment />
+			onMouseLeave={onLeave}>
+			{buttonHovered ? (
+				<FaComment
+					className={
+						"main-button-icon icon-hovered " +
+						(buttonLeft ? "icon-left" : "")
+					}
+				/>
+			) : (
+				<></>
+			)}
+			<FaComment className="main-button-icon icon-active" />
 		</button>
 	);
 }

@@ -12,7 +12,7 @@
 
 .app-container-collapsed {
 	bottom: var(--padding-size-1) !important;
-	animation: 1000ms slidedown;
+	animation: 1100ms slidedown;
 }
 
 @media screen and (max-width: 420px) {

@@ -42,26 +42,26 @@
 }
 
 .send-button {
-	background-color: var(--primary-color-1);
+	background: var(--primary-color-2);
 	padding: 0.5rem 12px;
 	margin-left: var(--padding-size-1);
 	border: transparent;
 	border-radius: var(--border-radius-2);
 
 	color: white;
-	transition: background-color 0.3s;
+	transition: background 0.3s;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 }
 
 .send-button:hover {
-	background-color: var(--primary-color-4);
+	background: var(--primary-color-3);
 	cursor: pointer;
 }
 
 .send-button:disabled {
-	background-color: var(--primary-color-2);
+	background: var(--primary-color-3);
 }
 
 .chatboard-control-form {
