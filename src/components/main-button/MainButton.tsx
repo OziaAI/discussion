@@ -1,6 +1,6 @@
 import React, { MouseEventHandler, useState } from "react";
 import "./MainButton.css";
-import { FaComment, FaPen, FaRegTimesCircle } from "react-icons/fa";
+import { FaComment, FaPen } from "react-icons/fa";
 
 function MainButton(props: {
 	onClick: MouseEventHandler<HTMLButtonElement>;
@@ -23,9 +23,10 @@ function MainButton(props: {
 			className="main-button"
 			onClick={props.onClick}
 			onMouseOver={onHover}
-			onMouseLeave={onLeave}>
+			onMouseLeave={onLeave}
+		>
 			{buttonHovered ? (
-				<FaComment
+				<FaPen
 					className={
 						"main-button-icon icon-hovered " +
 						(buttonLeft ? "icon-left" : "")

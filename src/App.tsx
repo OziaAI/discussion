@@ -45,6 +45,8 @@ function App() {
 			"chatboard-input",
 		) as HTMLInputElement;
 
+		if (message === "" || message === null) return;
+
 		let cleansedChat = cleanse(chats);
 		client.send(msg === null ? message : msg, cleansedChat, setChats);
 		setMessage("");

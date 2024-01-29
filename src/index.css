@@ -32,9 +32,13 @@ https://stackoverflow.com/questions/2989263/disable-auto-zoom-in-input-text-tag-
 
 :root {
 	/* background colors */
-	--primary-color-1: radial-gradient( circle farthest-corner at 10% 20%, var(--primary-color-2) 0.1%, var(--primary-color-3) 99.8% );;
-	--primary-color-2: rgba(37,145,251,0.98);
-	--primary-color-3: rgba(0,7,128,1);
+	--primary-color-1: radial-gradient(
+		circle farthest-corner at 10% 20%,
+		var(--primary-color-2) 0.1%,
+		var(--primary-color-3) 99.8%
+	);
+	--primary-color-2: rgba(37, 145, 251, 0.98);
+	--primary-color-3: rgba(0, 7, 128, 1);
 	--primary-color-4: #eeeeee;
 
 	--message-color-me: #248bf5; /* iMessage color */
