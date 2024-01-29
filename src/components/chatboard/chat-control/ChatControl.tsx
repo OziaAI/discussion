@@ -31,7 +31,8 @@ function ChatControl(props: { onChangeMessage: React.ChangeEventHandler }) {
 				<button
 					className="send-button"
 					onClick={onClick}
-					disabled={disableControl}>
+					disabled={disableControl}
+				>
 					<FaPaperPlane />
 				</button>
 			</form>
@@ -40,7 +41,8 @@ function ChatControl(props: { onChangeMessage: React.ChangeEventHandler }) {
 				<img
 					alt="logo of Ozia"
 					src={robot}
-					className={"logo-image"}></img>
+					className={"logo-image"}
+				></img>
 				<strong>Ozia</strong>
 			</p>
 		</div>

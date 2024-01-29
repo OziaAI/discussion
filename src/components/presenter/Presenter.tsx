@@ -12,7 +12,8 @@ function Presenter(props: {
 			className={
 				"presenter " +
 				(props.active ? "presenter-expanded" : "presenter-collapsed")
-			}>
+			}
+		>
 			{props.active ? props.children : props.button}
 		</div>
 	);

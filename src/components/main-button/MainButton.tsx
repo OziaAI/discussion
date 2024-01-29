@@ -24,7 +24,8 @@ function MainButton(props: {
 			className="main-button"
 			onClick={props.onClick}
 			onMouseOver={onHover}
-			onMouseLeave={onLeave}>
+			onMouseLeave={onLeave}
+		>
 			{selectContentButton()}
 		</button>
 	);

@@ -12,13 +12,12 @@ body {
 
 :root {
 	/* background colors */
-	--primary-color-1: #3FA7D6;
-	--primary-color-2: #9AD0EA;
+	--primary-color-1: #3fa7d6;
+	--primary-color-2: #9ad0ea;
 	--primary-color-3: #eeeeee;
-	--primary-color-4: #278BB9;
+	--primary-color-4: #278bb9;
 
-
-	--message-color-me: #3FA7D6; /*#248bf5;*/ /* iMessage color */
+	--message-color-me: #3fa7d6; /*#248bf5;*/ /* iMessage color */
 	--message-color-them: #e5e5ea;
 
 	/* foreground colors */
@@ -33,13 +32,14 @@ body {
 	--border-radius-2: 5px;
 
 	--box-shadow-1: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-	--box-shadow-2: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+	--box-shadow-2: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+		rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 
-	--primary-satisfied-color: #157F1F;
-	--primary-dissatisfied-color: #C44536;
-	--secondary-satisfied-color: #157F1F;
-	--secondary-dissatisfied-color: #C44536;
+	--primary-satisfied-color: #157f1f;
+	--primary-dissatisfied-color: #c44536;
+	--secondary-satisfied-color: #157f1f;
+	--secondary-dissatisfied-color: #c44536;
 
-	--hovered-satisfied-color: #1A9E27;
-	--hovered-dissatisfied-color: #CF5C4F;
+	--hovered-satisfied-color: #1a9e27;
+	--hovered-dissatisfied-color: #cf5c4f;
 }

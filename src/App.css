@@ -2,12 +2,12 @@
 	position: fixed;
 	bottom: var(--padding-size-1);
 	left: var(--padding-size-1);
+	z-index: 10 !important;
 }
 
 .app-container-expanded {
 	bottom: var(--padding-size-1) !important;
 }
-
 
 @media screen and (max-width: 420px) {
 	.app-container-expanded {

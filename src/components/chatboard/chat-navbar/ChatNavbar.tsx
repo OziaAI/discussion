@@ -15,7 +15,8 @@ function ChatNavbar() {
 			</div>
 			<button
 				id="chat-navbar-button"
-				onClick={() => setDisplayChat(false)}>
+				onClick={() => setDisplayChat(false)}
+			>
 				<FaAngleDoubleDown />
 			</button>
 		</nav>

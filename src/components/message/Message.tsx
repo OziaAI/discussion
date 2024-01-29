@@ -27,7 +27,8 @@ function Message(props: {
 			acceptButton = (
 				<button
 					className="button-option button-success"
-					onClick={() => onSend(option?.acceptAction?.messageToSend)}>
+					onClick={() => onSend(option?.acceptAction?.messageToSend)}
+				>
 					{option.acceptAction.buttonText}
 				</button>
 			);
@@ -36,7 +37,8 @@ function Message(props: {
 			denyButton = (
 				<button
 					className="button-option button-failure"
-					onClick={() => onSend(option?.denyAction?.messageToSend)}>
+					onClick={() => onSend(option?.denyAction?.messageToSend)}
+				>
 					{option.denyAction.buttonText}
 				</button>
 			);
@@ -57,14 +59,16 @@ function Message(props: {
 					(!props.sentMessage
 						? "message-container-received"
 						: "message-container-sent")
-				}>
+				}
+			>
 				<div
 					className={
 						"message-text " +
 						(props.sentMessage
 							? "message-sent"
 							: "message-received")
-					}>
+					}
+				>
 					<span>{props.message.message}</span>
 				</div>
 				<img
@@ -75,7 +79,8 @@ function Message(props: {
 						(props.sentMessage
 							? "message-image-me"
 							: "message-image-them")
-					}></img>
+					}
+				></img>
 			</div>
 			{messageOption()}
 			{disableControl || props.message.context.disconnect ? (
@@ -88,7 +93,8 @@ function Message(props: {
 					{disableControl && props.isLast ? (
 						<button
 							className="new-discussion"
-							onClick={() => controlDiscussion(true)}>
+							onClick={() => controlDiscussion(true)}
+						>
 							Start new conversation
 						</button>
 					) : (

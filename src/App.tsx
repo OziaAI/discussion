@@ -94,12 +94,15 @@ function App() {
 	return (
 		<div
 			id="app-container"
-			className={displayChat ? "app-container-expanded" : ""}>
+			className={displayChat ? "app-container-expanded" : ""}
+		>
 			<ChatContext.Provider value={chats}>
 				<ControlContext.Provider
-					value={[disableControl, controlDiscussion]}>
+					value={[disableControl, controlDiscussion]}
+				>
 					<DisplayContext.Provider
-						value={[displayChat, setDisplayChat]}>
+						value={[displayChat, setDisplayChat]}
+					>
 						<SendMessageContext.Provider value={sendMessage}>
 							<Presenter
 								active={displayChat}
@@ -108,7 +111,8 @@ function App() {
 										onClick={mainButtonOnClick}
 										displayChat={displayChat}
 									/>
-								}>
+								}
+							>
 								<Chatboard
 									onCloseClick={closeButtonOnClick}
 									onChangeMessage={onChangeMessage}

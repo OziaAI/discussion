@@ -1,53 +1,53 @@
 #chat-navbar-container {
-    background: var(--primary-color-1);
-    color: var(--secondary-color-1);
-    display: flex;
+	background: var(--primary-color-1);
+	display: flex;
 
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
 
-    padding: var(--padding-size-1) 0;
-    border-radius: var(--border-radius-1) var(--border-radius-1) 0 0;
+	padding: var(--padding-size-1) 0;
+	border-radius: var(--border-radius-1) var(--border-radius-1) 0 0;
 }
 
 #chat-navbar-logo {
-    padding: var(--padding-size-2);
-    margin: 0;
-    margin-left: var(--padding-size-1);
-    background-color: white;
-    border-radius: 50%;
+	padding: var(--padding-size-2);
+	margin: 0;
+	margin-left: var(--padding-size-1);
+	background-color: white;
+	border-radius: 50%;
 }
 
 #chat-navbar-merchant-name {
-    padding: 0;
-    margin: 0;
-    margin-left: var(--padding-size-1);
+	padding: 0;
+	margin: 0;
+	margin-left: var(--padding-size-1);
 
-    font-size: 20px;
-    font-weight: 700;
+	font-size: 20px;
+	font-weight: 700;
+	color: white;
 }
 
 #chat-brand {
-    display: flex;
-    align-items: center;
+	display: flex;
+	align-items: center;
 }
 
 #chat-navbar-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: var(--padding-size-1);
-    color: white;
-    background-color: transparent;
-    transition: background-color 0.3s;
-    border: transparent;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-right: var(--padding-size-1);
+	color: white;
+	background-color: transparent;
+	transition: background-color 0.3s;
+	border: transparent;
 
-    border-radius: 50%;
-    padding: var(--padding-size-2);
-    font-size: x-large;
+	border-radius: 50%;
+	padding: var(--padding-size-2);
+	font-size: x-large;
 }
 
 #chat-navbar-button:hover {
-    background-color: rgba(255,255,255,0.3);
+	background-color: rgba(255, 255, 255, 0.3);
 }

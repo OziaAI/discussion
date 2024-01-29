@@ -1,14 +1,14 @@
 .main-button {
-    padding: var(--padding-size-0);
-    color: white;
-    background-color: var(--primary-color-1);
-    border: 2px solid white;
-    border-radius: 50%;
+	padding: var(--padding-size-0);
+	color: white;
+	background-color: var(--primary-color-1);
+	border: 2px solid white;
+	border-radius: 50%;
 
-    font-size: xx-large;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+	font-size: xx-large;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 
-    box-shadow: var(--box-shadow-2);
+	box-shadow: var(--box-shadow-2);
 }
