@@ -21,6 +21,7 @@ function App() {
 	const [chats, setChats] = useState<Chat[]>([]);
 	const [message, setMessage] = useState("");
 	const [displayChat, setDisplayChat] = useState(false);
+	const [closingAnimation, setClosingAnimation] = useState(false);
 	const [disableControl, setDisableControl] = useState(false);
 
 	const onChangeMessage = (e: React.ChangeEvent<HTMLInputElement>): void => {
@@ -85,21 +86,37 @@ function App() {
 		}
 	};
 
+	const controlDisplayChat = (value: boolean) => {
+		if (value === true) {
+			setDisplayChat(value);
+			return;
+		}
+
+		setTimeout(() => {
+			setDisplayChat(value);
+			setClosingAnimation(false);
+		}, 1000);
+		setClosingAnimation(true);
+	};
+
 	// The div containing the custom classes are mandatory for Fade and Collapse
 	// transition to be triggered, see:
 	// https://stackoverflow.com/questions/60510444/react-bootstrap-collapse-not-working-with-custom-components
 	return (
 		<div
 			id="app-container"
-			className={displayChat ? "app-container-expanded" : ""}
-		>
+			className={
+				closingAnimation
+					? "app-container-collapsed"
+					: displayChat
+					  ? "app-container-expanded"
+					  : ""
+			}>
 			<ChatContext.Provider value={chats}>
 				<ControlContext.Provider
-					value={[disableControl, controlDiscussion]}
-				>
+					value={[disableControl, controlDiscussion]}>
 					<DisplayContext.Provider
-						value={[displayChat, setDisplayChat]}
-					>
+						value={[displayChat, controlDisplayChat]}>
 						<SendMessageContext.Provider value={sendMessage}>
 							<Presenter
 								active={displayChat}
@@ -108,8 +125,7 @@ function App() {
 										onClick={mainButtonOnClick}
 										displayChat={displayChat}
 									/>
-								}
-							>
+								}>
 								<Chatboard
 									onCloseClick={closeButtonOnClick}
 									onChangeMessage={onChangeMessage}

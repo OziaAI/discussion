@@ -19,6 +19,7 @@
 .presenter-collapsed {
 	max-width: 100px;
 	max-height: 100px;
+	animation: 1s slideup;
 }
 
 @media screen and (max-width: 420px) {

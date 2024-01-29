@@ -11,4 +11,11 @@
 	justify-content: center;
 
 	box-shadow: var(--box-shadow-2);
+    transition: font-size 0.5s, color 0.5s, border-color 0.5s, background-color 0.5s;
+}
+
+.main-button:hover {
+    border-color: var(--primary-color-1);
+    color: var(--primary-color-1);
+    background-color: white;
 }

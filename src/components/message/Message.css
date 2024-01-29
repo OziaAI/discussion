@@ -66,6 +66,7 @@
 	color: white;
 	transition: background-color 0.3s;
 	border-color: transparent;
+	padding: var(--padding-size-2) 0;
 }
 
 .button-success {
