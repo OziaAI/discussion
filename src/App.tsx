@@ -109,14 +109,17 @@ function App() {
 				closingAnimation
 					? "app-container-collapsed"
 					: displayChat
-					  ? "app-container-expanded"
-					  : ""
-			}>
+					? "app-container-expanded"
+					: ""
+			}
+		>
 			<ChatContext.Provider value={chats}>
 				<ControlContext.Provider
-					value={[disableControl, controlDiscussion]}>
+					value={[disableControl, controlDiscussion]}
+				>
 					<DisplayContext.Provider
-						value={[displayChat, controlDisplayChat]}>
+						value={[displayChat, controlDisplayChat]}
+					>
 						<SendMessageContext.Provider value={sendMessage}>
 							<Presenter
 								active={displayChat}
@@ -125,7 +128,8 @@ function App() {
 										onClick={mainButtonOnClick}
 										displayChat={displayChat}
 									/>
-								}>
+								}
+							>
 								<Chatboard
 									onCloseClick={closeButtonOnClick}
 									onChangeMessage={onChangeMessage}

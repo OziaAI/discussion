@@ -24,9 +24,9 @@
 	margin-left: var(--padding-size-1);
 
 	font-size: 20px;
-    line-height: 1 !important;
-    letter-spacing: -0.05em;
-    font-weight: 700;
+	line-height: 1 !important;
+	letter-spacing: -0.05em;
+	font-weight: 700;
 	color: white;
 }
 
@@ -52,4 +52,12 @@
 
 #chat-navbar-button:hover {
 	background-color: rgba(255, 255, 255, 0.3);
+	cursor: pointer;
+}
+
+@media screen and (max-width: 420px) {
+	#chat-navbar-container {
+		border-top-left-radius: 0;
+		border-top-right-radius: 0;
+	}
 }

@@ -23,10 +23,12 @@ body {
 /* prevents zoom when clicking on input on mobile phone:
 https://stackoverflow.com/questions/2989263/disable-auto-zoom-in-input-text-tag-safari-on-iphone/47590496 */
 @media screen and (max-width: 599px) {
-	input, select, textarea {
-	  font-size: 16px !important;
+	input,
+	select,
+	textarea {
+		font-size: 16px !important;
 	}
-  }
+}
 
 :root {
 	/* background colors */

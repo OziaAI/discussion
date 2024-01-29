@@ -57,6 +57,7 @@
 
 .send-button:hover {
 	background-color: var(--primary-color-4);
+	cursor: pointer;
 }
 
 .send-button:disabled {
