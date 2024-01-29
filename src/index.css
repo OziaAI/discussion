@@ -11,8 +11,8 @@ body {
 	font-variation-settings: "slnt" 0;
 
 	/* properties to fix spotify idiots css */
-	letter-spacing: 0 !important;
-	line-height: 0 !important;
+	letter-spacing: unset !important;
+	line-height: unset !important;
 }
 
 * {
