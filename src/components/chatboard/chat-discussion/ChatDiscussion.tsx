@@ -1,12 +1,14 @@
 import { MutableRefObject, useContext, useEffect, useRef } from "react";
 
 import Message from "../../message/Message";
-import { ChatContext } from "../../../contexts/Contexts";
+import { ChatContext, WingmanContext } from "../../../contexts/Contexts";
 
 import "./ChatDiscussion.css";
+import MessageBubble from "../../message-bubble/MessageBubble";
 
 function ChatDiscussion() {
 	const chats = useContext(ChatContext);
+	const waitingWingmanResponse = useContext(WingmanContext);
 	const bottomRef: MutableRefObject<HTMLDivElement | null> = useRef(null);
 
 	useEffect(() => {
@@ -23,6 +25,7 @@ function ChatDiscussion() {
 					isLast={index + 1 === chats.length}
 				/>
 			))}
+			{waitingWingmanResponse ? <MessageBubble /> : <></>}
 			<div ref={bottomRef}></div>
 		</div>
 	);

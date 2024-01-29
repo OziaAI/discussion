@@ -42,9 +42,18 @@
 
 @keyframes slidedown {
 	from {
-		transform: translateY(0%);
+		transform: translatey(0%);
 	}
 	to {
-		transform: translateY(100%);
+		transform: translatey(100%);
+	}
+}
+
+@keyframes fadein {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
 	}
 }

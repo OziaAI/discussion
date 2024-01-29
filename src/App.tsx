@@ -11,6 +11,7 @@ import {
 	ControlContext,
 	DisplayContext,
 	SendMessageContext,
+	WingmanContext,
 } from "./contexts/Contexts";
 import { WingmanMessage } from "./types/WingmanMessage";
 
@@ -20,6 +21,7 @@ let client: Client = new Client(socket);
 function App() {
 	const [chats, setChats] = useState<Chat[]>([]);
 	const [message, setMessage] = useState("");
+	const [waitingWingmanResponse, setWaitingWingmanResponse] = useState(false);
 	const [displayChat, setDisplayChat] = useState(false);
 	const [closingAnimation, setClosingAnimation] = useState(false);
 	const [disableControl, setDisableControl] = useState(false);
@@ -47,6 +49,7 @@ function App() {
 		client.send(msg === null ? message : msg, cleansedChat, setChats);
 		setMessage("");
 		input.value = "";
+		setWaitingWingmanResponse(true);
 	};
 
 	const cleanse = (chat: Chat[]): Chat[] => {
@@ -65,6 +68,7 @@ function App() {
 			option: data.option || null,
 			context: data.context,
 		};
+		setWaitingWingmanResponse(false);
 		setChats(chats.concat([{ message: wingmanMessage, sent: false }]));
 		if (wingmanMessage.context.disconnect) {
 			setDisableControl(true);
@@ -121,20 +125,24 @@ function App() {
 						value={[displayChat, controlDisplayChat]}
 					>
 						<SendMessageContext.Provider value={sendMessage}>
-							<Presenter
-								active={displayChat}
-								button={
-									<MainButton
-										onClick={mainButtonOnClick}
-										displayChat={displayChat}
-									/>
-								}
+							<WingmanContext.Provider
+								value={waitingWingmanResponse}
 							>
-								<Chatboard
-									onCloseClick={closeButtonOnClick}
-									onChangeMessage={onChangeMessage}
-								/>
-							</Presenter>
+								<Presenter
+									active={displayChat}
+									button={
+										<MainButton
+											onClick={mainButtonOnClick}
+											displayChat={displayChat}
+										/>
+									}
+								>
+									<Chatboard
+										onCloseClick={closeButtonOnClick}
+										onChangeMessage={onChangeMessage}
+									/>
+								</Presenter>
+							</WingmanContext.Provider>
 						</SendMessageContext.Provider>
 					</DisplayContext.Provider>
 				</ControlContext.Provider>
