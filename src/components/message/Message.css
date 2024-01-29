@@ -5,6 +5,10 @@
 	padding: var(--padding-size-2) var(--padding-size-1);
 }
 
+.message-content {
+	font-size: 15px;
+}
+
 .message-sent {
 	border-top-left-radius: 15px;
 	border-top-right-radius: 15px;
