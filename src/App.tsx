@@ -123,10 +123,9 @@ function App() {
 				closingAnimation
 					? "app-container-collapsed"
 					: displayChat
-					? "app-container-expanded"
-					: ""
-			}
-		>
+					  ? "app-container-expanded"
+					  : ""
+			}>
 			{!displayChat ? <Popover>Hello there! 👋</Popover> : <></>}
 			<ChatContext.Provider value={chats}>
 				<ControlContext.Provider
@@ -134,15 +133,12 @@ function App() {
 						disableControl,
 						disableSendButton,
 						controlDiscussion,
-					]}
-				>
+					]}>
 					<DisplayContext.Provider
-						value={[displayChat, controlDisplayChat]}
-					>
+						value={[displayChat, controlDisplayChat]}>
 						<SendMessageContext.Provider value={sendMessage}>
 							<WingmanContext.Provider
-								value={waitingWingmanResponse}
-							>
+								value={waitingWingmanResponse}>
 								<Presenter
 									active={displayChat}
 									button={
@@ -150,8 +146,7 @@ function App() {
 											onClick={mainButtonOnClick}
 											displayChat={displayChat}
 										/>
-									}
-								>
+									}>
 									<Chatboard
 										onCloseClick={closeButtonOnClick}
 										onChangeMessage={onChangeMessage}

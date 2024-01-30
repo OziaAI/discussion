@@ -1,8 +1,11 @@
 #app-container {
 	position: fixed;
 	bottom: var(--padding-size-1);
-	left: calc(2 * var(--padding-size-0));
+	left: var(--padding-size-3);
 	z-index: 10 !important;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 .app-container-expanded {
