@@ -15,7 +15,8 @@ function Message(props: {
 	isLast: boolean;
 }) {
 	const onSend: Function = useContext(SendMessageContext);
-	const [disableControl, controlDiscussion] = useContext(ControlContext);
+	const [disableControl, disableSendButton, controlDiscussion] =
+		useContext(ControlContext);
 	const messageOption = () => {
 		let option: WingmanMessageOption | null = props.message.option;
 		if (option === null) return <></>;

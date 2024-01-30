@@ -102,11 +102,16 @@
 	margin: 0 auto;
 	padding: var(--padding-size-2);
 	color: white;
-	transition: background-color 0.3s;
+	transition: background 0.3s;
 	border-color: transparent;
 	border-radius: var(--border-radius-2);
 
-	background-color: var(--primary-color-1);
+	background: var(--primary-color-2);
+}
+
+.new-discussion:hover {
+	cursor: pointer;
+	background: var(--primary-color-3);
 }
 
 .conversation-end-holder {

@@ -26,9 +26,15 @@ function App() {
 	const [displayChat, setDisplayChat] = useState(false);
 	const [closingAnimation, setClosingAnimation] = useState(false);
 	const [disableControl, setDisableControl] = useState(false);
+	const [disableSendButton, setDisableSendButton] = useState(true);
 
 	const onChangeMessage = (e: React.ChangeEvent<HTMLInputElement>): void => {
-		setMessage(e.target.value);
+		let input_message: string = e.target.value;
+		if (input_message === "") setDisableSendButton(true);
+		else if (disableSendButton)
+			// and implicitely input_message is not empty
+			setDisableSendButton(false);
+		setMessage(input_message);
 	};
 
 	const mainButtonOnClick = (e: MouseEvent<HTMLButtonElement>): void => {
@@ -46,12 +52,13 @@ function App() {
 			"chatboard-input",
 		) as HTMLInputElement;
 
-		if (message === "" || message === null) return;
+		if ((message === "" || message === null) && msg == null) return;
 
 		let cleansedChat = cleanse(chats);
 		client.send(msg === null ? message : msg, cleansedChat, setChats);
 		setMessage("");
 		input.value = "";
+		setDisableSendButton(true);
 		setWaitingWingmanResponse(true);
 	};
 
@@ -123,7 +130,11 @@ function App() {
 			{!displayChat ? <Popover>Hello there! 👋</Popover> : <></>}
 			<ChatContext.Provider value={chats}>
 				<ControlContext.Provider
-					value={[disableControl, controlDiscussion]}
+					value={[
+						disableControl,
+						disableSendButton,
+						controlDiscussion,
+					]}
 				>
 					<DisplayContext.Provider
 						value={[displayChat, controlDisplayChat]}

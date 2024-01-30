@@ -32,8 +32,20 @@
 	box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
+.chatboard-control-form:disabled {
+	background-color: var(--secondary-color-2);
+}
+
 #chatboard-input:disabled {
-	background-color: #e9ecef;
+	background-color: var(--secondary-color-2);
+}
+
+.chatboard-control-form-disabled {
+	background-color: var(--secondary-color-2) !important;
+}
+
+.chatboard-control-form-disabled .send-button {
+	color: var(--secondary-color-2) !important;
 }
 
 .logo-image {
@@ -81,4 +93,5 @@
 
 .send-button:disabled {
 	background: var(--secondary-color-2);
+	cursor: default;
 }

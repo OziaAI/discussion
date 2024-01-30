@@ -8,8 +8,8 @@ import robot from "../../../images/logo32.png";
 
 function ChatControl(props: { onChangeMessage: React.ChangeEventHandler }) {
 	const onSend: Function = useContext(SendMessageContext);
-	const [disableControl, setDisableControl] = useContext(ControlContext);
-	const [messageEmpty, setMessageEmpty] = useState(true);
+	const [disableControl, disableSendButton, setDisableControl] =
+		useContext(ControlContext);
 	const onSubmit = (e: FormEvent) => {
 		e.preventDefault();
 		onSend();
@@ -19,35 +19,28 @@ function ChatControl(props: { onChangeMessage: React.ChangeEventHandler }) {
 		onSend();
 	};
 
-	const onChangeMessageWrapped = (
-		e: React.ChangeEvent<HTMLInputElement>,
-	): void => {
-		if (e.target.value === "") setMessageEmpty(true);
-		else if (messageEmpty)
-			// and (implicitely) input contains a text
-			setMessageEmpty(false);
-		props.onChangeMessage(e);
-	};
-
 	return (
 		<div id="chatboard-control">
 			<form
 				autoComplete="off"
 				onSubmit={onSubmit}
-				className="chatboard-control-form"
+				className={
+					"chatboard-control-form " +
+					(disableControl ? "chatboard-control-form-disabled" : "")
+				}
 			>
 				<input
 					autoComplete="false"
 					type="text"
 					placeholder={!disableControl ? "Your message" : ""}
 					id="chatboard-input"
-					onChange={onChangeMessageWrapped}
+					onChange={props.onChangeMessage}
 					disabled={disableControl}
 				/>
 				<button
 					className="send-button"
 					onClick={onClick}
-					disabled={disableControl || messageEmpty}
+					disabled={disableControl || disableSendButton}
 				>
 					<FaPaperPlane />
 				</button>
