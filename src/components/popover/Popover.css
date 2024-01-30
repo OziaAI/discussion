@@ -1,0 +1,43 @@
+.popover-container {
+	border-radius: 70px;
+	background: #fff;
+	padding: var(--padding-size-1) var(--padding-size-1);
+	box-shadow: 0 10px 30px rgba(65, 72, 86, 0.05);
+	opacity: 0;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	z-index: 10;
+	position: fixed;
+	transform: translateY(-50px);
+	left: 15px;
+	animation-delay: 2s;
+	animation-duration: 1s;
+	animation-timing-function: linear;
+	animation-name: popin;
+	animation-fill-mode: forwards;
+}
+
+.popover-container::after {
+	content: "";
+	width: 20px;
+	height: 20px;
+	background: #fff;
+	border-radius: 3px;
+	position: absolute;
+	left: 50%;
+	margin-left: -10px;
+	bottom: -8px;
+	transform: rotate(45deg);
+	position: absolute;
+	z-index: -1;
+}
+
+@keyframes popin {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}

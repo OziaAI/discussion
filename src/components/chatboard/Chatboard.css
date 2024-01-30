@@ -8,6 +8,7 @@
 	border-radius: var(--border-radius-1);
 
 	box-shadow: var(--box-shadow-2);
+	background-color: white;
 }
 
 @media screen and (max-width: 420px) {

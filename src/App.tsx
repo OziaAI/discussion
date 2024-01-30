@@ -14,6 +14,7 @@ import {
 	WingmanContext,
 } from "./contexts/Contexts";
 import { WingmanMessage } from "./types/WingmanMessage";
+import Popover from "./components/popover/Popover";
 
 let socket: WebSocket | null = createSocket();
 let client: Client = new Client(socket);
@@ -119,6 +120,7 @@ function App() {
 					: ""
 			}
 		>
+			{!displayChat ? <Popover>Hello there! 👋</Popover> : <></>}
 			<ChatContext.Provider value={chats}>
 				<ControlContext.Provider
 					value={[disableControl, controlDiscussion]}

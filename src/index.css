@@ -13,6 +13,10 @@ body {
 	/* properties to fix spotify idiots css */
 	letter-spacing: unset !important;
 	line-height: unset !important;
+
+	background-color: var(--message-color-them);
+	height: 100vh;
+	width: 100vw;
 }
 
 * {
@@ -46,6 +50,7 @@ https://stackoverflow.com/questions/2989263/disable-auto-zoom-in-input-text-tag-
 
 	/* foreground colors */
 	--secondary-color-1: white;
+	--secondary-color-2: #e5e5ea;
 
 	/* padding sizes */
 	--padding-size-0: 20px;

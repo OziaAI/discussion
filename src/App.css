@@ -1,17 +1,19 @@
 #app-container {
 	position: fixed;
 	bottom: var(--padding-size-1);
-	left: var(--padding-size-1);
+	left: calc(2 * var(--padding-size-0));
 	z-index: 10 !important;
 }
 
 .app-container-expanded {
 	bottom: var(--padding-size-1) !important;
+	left: var(--padding-size-1) !important;
 	animation: 1s slideup;
 }
 
 .app-container-collapsed {
 	bottom: var(--padding-size-1) !important;
+	left: var(--padding-size-1) !important;
 	animation: 1100ms slidedown;
 }
 

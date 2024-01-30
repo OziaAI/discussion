@@ -6,11 +6,30 @@
 	margin-bottom: var(--padding-size-1);
 }
 
+.chatboard-control-form {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	border-radius: var(--border-radius-1);
+	border: 1px solid lightgrey;
+	padding-right: var(--padding-size-1);
+	transition: 0.5s box-shadow;
+}
+
 #chatboard-input {
 	border-radius: var(--border-radius-2);
-	border: 1px solid lightgrey;
-	padding: 0.5rem var(--padding-size-1);
+	padding: var(--padding-size-1) 0;
+	margin-left: var(--padding-size-1);
 	flex: 1 0 0%;
+	border: none;
+}
+
+#chatboard-input:focus {
+	outline: none;
+}
+
+.chatboard-control-form:focus-within {
+	box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 #chatboard-input:disabled {
@@ -42,11 +61,11 @@
 }
 
 .send-button {
+	height: 100%;
 	background: var(--primary-color-2);
-	padding: 0.5rem 12px;
-	margin-left: var(--padding-size-1);
+	padding: var(--padding-size-2) var(--padding-size-0);
 	border: transparent;
-	border-radius: var(--border-radius-2);
+	border-radius: var(--border-radius-1);
 
 	color: white;
 	transition: background 0.3s;
@@ -61,10 +80,5 @@
 }
 
 .send-button:disabled {
-	background: var(--primary-color-3);
-}
-
-.chatboard-control-form {
-	display: flex;
-	justify-content: space-between;
+	background: var(--secondary-color-2);
 }

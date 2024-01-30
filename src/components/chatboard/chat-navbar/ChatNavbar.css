@@ -13,10 +13,20 @@
 		rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
 }
 
+.chat-text {
+	margin-left: var(--padding-size-1);
+}
+
+.chat-title {
+	color: white;
+	letter-spacing: -0.05em;
+	font-weight: normal;
+	margin: var(--padding-size-1) 0;
+}
+
 #chat-navbar-logo {
 	padding: var(--padding-size-2);
 	margin: 0;
-	margin-left: var(--padding-size-1);
 	background-color: white;
 	border-radius: 50%;
 }
@@ -24,13 +34,23 @@
 #chat-navbar-merchant-name {
 	padding: 0;
 	margin: 0;
-	margin-left: var(--padding-size-1);
 
+	margin-left: var(--padding-size-1);
 	font-size: 20px;
 	line-height: 1 !important;
 	letter-spacing: -0.05em;
 	font-weight: 700;
 	color: white;
+}
+
+#chat-navbar-merchant-description {
+	padding: 0;
+	margin: 0;
+	margin-left: var(--padding-size-1);
+
+	color: var(--secondary-color-2);
+
+	font-size: 10px;
 }
 
 #chat-brand {
