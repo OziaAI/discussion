@@ -15,18 +15,37 @@ import {
 } from "./contexts/Contexts";
 import { WingmanMessage } from "./types/WingmanMessage";
 import Popover from "./components/popover/Popover";
+import { getStorage, setStorage } from "./tools/storage_access";
 
 let socket: WebSocket | null = createSocket();
 let client: Client = new Client(socket);
 
-function App() {
+function App(props: { className: string }) {
 	const [chats, setChats] = useState<Chat[]>([]);
 	const [message, setMessage] = useState("");
 	const [waitingWingmanResponse, setWaitingWingmanResponse] = useState(false);
-	const [displayChat, setDisplayChat] = useState(false);
+	const [displayChat, setDisplayChatRaw] = useState(false);
+	const [displayPopover, setDisplayPopover] = useState(
+		getStorage("popover-display") === "",
+	);
 	const [closingAnimation, setClosingAnimation] = useState(false);
 	const [disableControl, setDisableControl] = useState(false);
 	const [disableSendButton, setDisableSendButton] = useState(true);
+
+	const setDisplayChat = (value: boolean) => {
+		if (value) {
+			// this means the chatboard has been open
+			if (displayPopover) {
+				// this means this is the first time the popover has been displayed
+				// so we remember this information in the client's local storage
+				// so that next time he faces the main button, no popover is visible
+				setDisplayPopover(false);
+				setStorage("popover-display", "true");
+			}
+		}
+
+		setDisplayChatRaw(value);
+	};
 
 	const onChangeMessage = (e: React.ChangeEvent<HTMLInputElement>): void => {
 		let input_message: string = e.target.value;
@@ -120,13 +139,21 @@ function App() {
 		<div
 			id="app-container"
 			className={
-				closingAnimation
+				(closingAnimation
 					? "app-container-collapsed"
 					: displayChat
 					  ? "app-container-expanded"
-					  : ""
+					  : "") +
+				" " +
+				props.className
 			}>
-			{!displayChat ? <Popover>Hello there! 👋</Popover> : <></>}
+			{!displayChat ? (
+				<Popover className={!displayPopover ? "popover-none" : ""}>
+					Hello there! 👋
+				</Popover>
+			) : (
+				<></>
+			)}
 			<ChatContext.Provider value={chats}>
 				<ControlContext.Provider
 					value={[
