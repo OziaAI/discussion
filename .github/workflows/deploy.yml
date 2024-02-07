@@ -27,7 +27,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: discussion-build
-          path: artifact
+          path: discussion/artifact
   deploy:
     name: Deploy Discussion on Shopify CDN
     needs: build
