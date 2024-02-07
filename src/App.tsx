@@ -11,21 +11,49 @@ import {
 	ControlContext,
 	DisplayContext,
 	SendMessageContext,
+	WingmanContext,
 } from "./contexts/Contexts";
 import { WingmanMessage } from "./types/WingmanMessage";
+import Popover from "./components/popover/Popover";
+import { getStorage, setStorage } from "./tools/storage_access";
 
 let socket: WebSocket | null = createSocket();
 let client: Client = new Client(socket);
 
-function App() {
+function App(props: { className: string }) {
 	const [chats, setChats] = useState<Chat[]>([]);
 	const [message, setMessage] = useState("");
-	const [displayChat, setDisplayChat] = useState(false);
+	const [waitingWingmanResponse, setWaitingWingmanResponse] = useState(false);
+	const [displayChat, setDisplayChatRaw] = useState(false);
+	const [displayPopover, setDisplayPopover] = useState(
+		getStorage("popover-display") === "",
+	);
 	const [closingAnimation, setClosingAnimation] = useState(false);
 	const [disableControl, setDisableControl] = useState(false);
+	const [disableSendButton, setDisableSendButton] = useState(true);
+
+	const setDisplayChat = (value: boolean) => {
+		if (value) {
+			// this means the chatboard has been open
+			if (displayPopover) {
+				// this means this is the first time the popover has been displayed
+				// so we remember this information in the client's local storage
+				// so that next time he faces the main button, no popover is visible
+				setDisplayPopover(false);
+				setStorage("popover-display", "true");
+			}
+		}
+
+		setDisplayChatRaw(value);
+	};
 
 	const onChangeMessage = (e: React.ChangeEvent<HTMLInputElement>): void => {
-		setMessage(e.target.value);
+		let input_message: string = e.target.value;
+		if (input_message === "") setDisableSendButton(true);
+		else if (disableSendButton)
+			// and implicitely input_message is not empty
+			setDisableSendButton(false);
+		setMessage(input_message);
 	};
 
 	const mainButtonOnClick = (e: MouseEvent<HTMLButtonElement>): void => {
@@ -43,10 +71,14 @@ function App() {
 			"chatboard-input",
 		) as HTMLInputElement;
 
+		if ((message === "" || message === null) && msg == null) return;
+
 		let cleansedChat = cleanse(chats);
 		client.send(msg === null ? message : msg, cleansedChat, setChats);
 		setMessage("");
 		input.value = "";
+		setDisableSendButton(true);
+		setWaitingWingmanResponse(true);
 	};
 
 	const cleanse = (chat: Chat[]): Chat[] => {
@@ -65,6 +97,7 @@ function App() {
 			option: data.option || null,
 			context: data.context,
 		};
+		setWaitingWingmanResponse(false);
 		setChats(chats.concat([{ message: wingmanMessage, sent: false }]));
 		if (wingmanMessage.context.disconnect) {
 			setDisableControl(true);
@@ -106,35 +139,47 @@ function App() {
 		<div
 			id="app-container"
 			className={
-				closingAnimation
+				(closingAnimation
 					? "app-container-collapsed"
 					: displayChat
-					? "app-container-expanded"
-					: ""
-			}
-		>
+					  ? "app-container-expanded"
+					  : "") +
+				" " +
+				props.className
+			}>
+			{!displayChat ? (
+				<Popover className={!displayPopover ? "popover-none" : ""}>
+					Hello there! 👋
+				</Popover>
+			) : (
+				<></>
+			)}
 			<ChatContext.Provider value={chats}>
 				<ControlContext.Provider
-					value={[disableControl, controlDiscussion]}
-				>
+					value={[
+						disableControl,
+						disableSendButton,
+						controlDiscussion,
+					]}>
 					<DisplayContext.Provider
-						value={[displayChat, controlDisplayChat]}
-					>
+						value={[displayChat, controlDisplayChat]}>
 						<SendMessageContext.Provider value={sendMessage}>
-							<Presenter
-								active={displayChat}
-								button={
-									<MainButton
-										onClick={mainButtonOnClick}
-										displayChat={displayChat}
+							<WingmanContext.Provider
+								value={waitingWingmanResponse}>
+								<Presenter
+									active={displayChat}
+									button={
+										<MainButton
+											onClick={mainButtonOnClick}
+											displayChat={displayChat}
+										/>
+									}>
+									<Chatboard
+										onCloseClick={closeButtonOnClick}
+										onChangeMessage={onChangeMessage}
 									/>
-								}
-							>
-								<Chatboard
-									onCloseClick={closeButtonOnClick}
-									onChangeMessage={onChangeMessage}
-								/>
-							</Presenter>
+								</Presenter>
+							</WingmanContext.Provider>
 						</SendMessageContext.Provider>
 					</DisplayContext.Provider>
 				</ControlContext.Provider>

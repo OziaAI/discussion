@@ -1,14 +1,15 @@
 import { FaPaperPlane } from "react-icons/fa";
 
 import "./ChatControl.css";
-import { FormEvent, MouseEvent, useContext } from "react";
+import { FormEvent, MouseEvent, useContext, useState } from "react";
 import { ControlContext, SendMessageContext } from "../../../contexts/Contexts";
 
 import robot from "../../../images/logo32.png";
 
 function ChatControl(props: { onChangeMessage: React.ChangeEventHandler }) {
 	const onSend: Function = useContext(SendMessageContext);
-	const [disableControl, setDisableControl] = useContext(ControlContext);
+	const [disableControl, disableSendButton, setDisableControl] =
+		useContext(ControlContext);
 	const onSubmit = (e: FormEvent) => {
 		e.preventDefault();
 		onSend();
@@ -20,8 +21,16 @@ function ChatControl(props: { onChangeMessage: React.ChangeEventHandler }) {
 
 	return (
 		<div id="chatboard-control">
-			<form onSubmit={onSubmit} className="chatboard-control-form">
+			<form
+				autoComplete="off"
+				onSubmit={onSubmit}
+				className={
+					"chatboard-control-form " +
+					(disableControl ? "chatboard-control-form-disabled" : "")
+				}
+			>
 				<input
+					autoComplete="false"
 					type="text"
 					placeholder={!disableControl ? "Your message" : ""}
 					id="chatboard-input"
@@ -31,7 +40,7 @@ function ChatControl(props: { onChangeMessage: React.ChangeEventHandler }) {
 				<button
 					className="send-button"
 					onClick={onClick}
-					disabled={disableControl}
+					disabled={disableControl || disableSendButton}
 				>
 					<FaPaperPlane />
 				</button>

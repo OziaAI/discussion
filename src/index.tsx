@@ -3,10 +3,21 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+import { getStorage } from "./tools/storage_access";
+import setColorTheme from "./tools/theme_definition";
+import { ThemeColor } from "./types/ThemeColor";
 
 const root = ReactDOM.createRoot(
 	document.getElementById("root") as HTMLElement,
 );
+
+const colorTheme: ThemeColor = getStorage(
+	"colorTheme",
+	"blue-gradient",
+) as ThemeColor;
+const chatPlacement = getStorage("chatPlacement", "right");
+
+setColorTheme(colorTheme);
 
 const resize = () => {
 	// First we get the viewport height and we multiple it by 1% to get a value for a vh unit
@@ -24,7 +35,11 @@ window.addEventListener("resize", () => {
 
 root.render(
 	<React.StrictMode>
-		<App />
+		<App
+			className={
+				"app-placement-" + (chatPlacement === "left" ? "left" : "right")
+			}
+		/>
 	</React.StrictMode>,
 );
 

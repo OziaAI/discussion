@@ -1,16 +1,9 @@
 .presenter {
-	transition:
-		max-width 0.5s,
-		max-height 0.5s;
 	padding: 0;
 	margin: 0;
-	background-color: white;
 }
 
 .presenter-expanded {
-	transition:
-		max-width 0s,
-		max-height 0.5s;
 	max-width: 500px;
 	max-height: 700px;
 	border-radius: var(--border-radius-1);

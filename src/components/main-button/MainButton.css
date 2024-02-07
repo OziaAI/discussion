@@ -1,27 +1,61 @@
 .main-button {
-	padding: var(--padding-size-0);
+	border-radius: 30%;
+	border: transparent;
+	background: transparent;
 	color: white;
-	background-color: var(--primary-color-1);
+	background: var(--primary-color-1);
 	border: 2px solid white;
-	border-radius: 50%;
-
-	font-size: xx-large;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-
 	box-shadow: var(--box-shadow-2);
-	transition:
-		font-size 0.5s,
-		color 0.5s,
-		border-color 0.5s,
-		background-color 0.5s;
+	transition: border 500ms;
 }
 
 .main-button:hover {
-	border-color: var(--primary-color-1);
-	color: var(--primary-color-1);
-	background-color: white;
-
+	border: 2px solid var(--primary-color-2);
 	cursor: pointer;
+}
+
+.main-button-icon {
+	padding: var(--padding-size-0);
+	display: flex;
+	border-radius: 30%;
+
+	font-size: x-large;
+	align-items: center;
+	justify-content: center;
+	transition: display 0.5s;
+}
+
+.icon-active {
+	color: white;
+	background: var(--primary-color-1);
+}
+
+.icon-hovered {
+	position: absolute;
+	color: var(--primary-color-2);
+	background: white;
+	animation: 500ms opening;
+}
+
+.icon-left {
+	animation: 500ms closing;
+}
+
+@keyframes opening {
+	from {
+		transform: scale(0.3);
+	}
+	to {
+		transform: scale(1);
+	}
+}
+
+@keyframes closing {
+	from {
+		transform: scale(1);
+	}
+	to {
+		transform: scale(0.3);
+		color: white;
+	}
 }
