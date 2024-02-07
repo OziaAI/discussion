@@ -15,6 +15,7 @@ function Message(props: {
 	isLast: boolean;
 }) {
 	const onSend: Function = useContext(SendMessageContext);
+        // eslint-disable-next-line
 	const [disableControl, disableSendButton, controlDiscussion] =
 		useContext(ControlContext);
 	const messageOption = () => {

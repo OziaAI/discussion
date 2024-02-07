@@ -6,6 +6,7 @@ import { FaAngleDoubleDown } from "react-icons/fa";
 import { DisplayContext } from "../../../contexts/Contexts";
 
 function ChatNavbar() {
+        // eslint-disable-next-line
 	const [displayChat, setDisplayChat] = useContext(DisplayContext);
 	return (
 		<nav id="chat-navbar-container">

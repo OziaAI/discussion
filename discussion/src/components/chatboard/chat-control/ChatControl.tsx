@@ -1,13 +1,14 @@
 import { FaPaperPlane } from "react-icons/fa";
 
 import "./ChatControl.css";
-import { FormEvent, MouseEvent, useContext, useState } from "react";
+import { FormEvent, MouseEvent, useContext } from "react";
 import { ControlContext, SendMessageContext } from "../../../contexts/Contexts";
 
 import robot from "../../../images/logo32.png";
 
 function ChatControl(props: { onChangeMessage: React.ChangeEventHandler }) {
 	const onSend: Function = useContext(SendMessageContext);
+        // eslint-disable-next-line
 	const [disableControl, disableSendButton, setDisableControl] =
 		useContext(ControlContext);
 	const onSubmit = (e: FormEvent) => {
