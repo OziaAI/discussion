@@ -1,0 +1,14 @@
+# build environment
+FROM node:21-alpine3.17
+WORKDIR /app
+
+# Since you will need to mount the entire repository
+# There is no need to copy files
+# We can just launch the installation of npm packages
+# This will create node_module folder inside your local filesystem 
+
+COPY ./docker-entrypoint.dev.sh .
+
+EXPOSE 3000
+
+ENTRYPOINT ["/app/docker-entrypoint.dev.sh"]

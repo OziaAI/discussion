@@ -1,0 +1,129 @@
+.message-text {
+	align-items: center;
+	display: inline-flex;
+	width: 100%;
+	padding: var(--padding-size-2) var(--padding-size-1);
+}
+
+.message-content {
+	font-size: 15px;
+}
+
+.message-sent {
+	border-top-left-radius: 15px;
+	border-top-right-radius: 15px;
+	border-bottom-left-radius: 15px;
+	border-bottom-right-radius: 5px;
+	background-color: var(--message-color-me);
+	color: white;
+}
+
+.message-received {
+	border-top-left-radius: 15px;
+	border-top-right-radius: 15px;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 15px;
+	background-color: var(--message-color-them);
+	color: dark;
+}
+
+.message-image {
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+}
+
+.message-padder {
+	margin-left: var(--padding-size-1);
+	margin-right: var(--padding-size-1);
+}
+
+.message-container {
+	display: flex;
+	align-items: flex-end;
+	margin-bottom: var(--padding-size-1);
+}
+
+.message-container-sent {
+	flex-direction: row;
+}
+
+.message-container-received {
+	flex-direction: row-reverse;
+	justify-content: flex-end;
+}
+
+.button-container {
+	margin-left: calc(30px + 0.5rem);
+	display: flex;
+	justify-content: space-evenly;
+	margin-top: var(--padding-size-1);
+}
+
+.button-option {
+	/*flex: 1 0 0%;*/
+	width: 100%;
+	border-radius: 15px !important;
+	color: white;
+	transition: background-color 0.3s;
+	border-color: transparent;
+	padding: var(--padding-size-2) 0;
+}
+
+.button-success {
+	background-color: var(--primary-satisfied-color);
+}
+
+.button-failure {
+	background-color: var(--primary-dissatisfied-color);
+}
+
+.button-success:hover {
+	background-color: var(--hovered-satisfied-color);
+	cursor: pointer;
+}
+
+.button-failure:hover {
+	background-color: var(--hovered-dissatisfied-color);
+	cursor: pointer;
+}
+
+#conversation-end {
+	color: grey;
+	font-size: small;
+
+	/*text-center fst-italic m-0 */
+	text-align: center;
+	font-style: italic;
+	margin: 0;
+}
+
+.new-discussion {
+	margin: 0 auto;
+	padding: var(--padding-size-2);
+	color: white;
+	transition: background 0.3s;
+	border-color: transparent;
+	border-radius: var(--border-radius-2);
+
+	background: var(--primary-color-2);
+}
+
+.new-discussion:hover {
+	cursor: pointer;
+	background: var(--primary-color-3);
+}
+
+.conversation-end-holder {
+	display: flex;
+	flex-direction: column;
+	margin-top: var(--padding-size-1);
+}
+
+.message-image-me {
+	margin-left: var(--padding-size-1);
+}
+
+.message-image-them {
+	margin-right: var(--padding-size-1);
+}

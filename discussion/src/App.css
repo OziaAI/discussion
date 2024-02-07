@@ -1,0 +1,71 @@
+#app-container {
+	position: fixed;
+	bottom: var(--padding-size-1);
+	z-index: 10 !important;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.app-placement-left {
+	left: var(--padding-size-2);
+}
+
+.app-placement-right {
+	right: var(--padding-size-2);
+}
+
+.app-container-expanded {
+	bottom: var(--padding-size-1) !important;
+	left: var(--padding-size-1) !important;
+	animation: 1s slideup;
+}
+
+.app-container-collapsed {
+	bottom: var(--padding-size-1) !important;
+	left: var(--padding-size-1) !important;
+	animation: 1100ms slidedown;
+}
+
+@media screen and (max-width: 420px) {
+	.app-container-expanded {
+		bottom: 0 !important;
+		left: 0 !important;
+		right: 0 !important;
+		top: 0 !important;
+	}
+
+	.app-container-collapsed {
+		bottom: 0 !important;
+		left: 0 !important;
+		right: 0 !important;
+		top: 0 !important;
+	}
+}
+
+@keyframes slideup {
+	from {
+		transform: translateY(100%);
+	}
+	to {
+		transform: translateY(0%);
+	}
+}
+
+@keyframes slidedown {
+	from {
+		transform: translatey(0%);
+	}
+	to {
+		transform: translatey(110%);
+	}
+}
+
+@keyframes fadein {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
