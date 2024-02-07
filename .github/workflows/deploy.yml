@@ -1,5 +1,4 @@
-name: "Build project"
-description: "Build the Discussion React project and package it into an artifact"
+name: "Build node project"
 author: "Lilian Schall <lilian.schall@epita.fr>"
 
 
