@@ -1,9 +1,7 @@
 name: "Build node project"
-
 on:
   push:
     branches: [ main ]
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -17,9 +15,8 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - name: npm install and build
-        with:
-          env:
-            REACT_APP_BACKEND_PATH: ${{ secrets.BACKEND_PATH }}
+        env:
+          REACT_APP_BACKEND_PATH: ${{ secrets.BACKEND_PATH }}
         run: |
           cd discussion
           npm install
