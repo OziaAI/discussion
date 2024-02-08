@@ -59,4 +59,4 @@ jobs:
         run: |
           cd theme-app
           npm install
-          npm run deploy -- -f  --source-control-url "$COMMIT_URL"
+          npm run deploy -- -f  --source-control-url "$COMMIT_URL" --no-release
