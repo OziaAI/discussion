@@ -78,7 +78,7 @@
 	cursor: pointer;
 }
 
-@media screen and (max-width: 420px) {
+@media screen and (max-width: 599px) {
 	#chat-navbar-container {
 		border-radius: 0;
 	}

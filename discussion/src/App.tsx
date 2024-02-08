@@ -21,16 +21,23 @@ let socket: WebSocket | null = createSocket();
 let client: Client = new Client(socket);
 
 function App(props: { className: string }) {
-	const [chats, setChats] = useState<Chat[]>([]);
+	const [chats, setChatsRaw] = useState<Chat[]>(
+		JSON.parse(getStorage("chats", "[]")),
+	);
 	const [message, setMessage] = useState("");
 	const [waitingWingmanResponse, setWaitingWingmanResponse] = useState(false);
 	const [displayChat, setDisplayChatRaw] = useState(false);
 	const [displayPopover, setDisplayPopover] = useState(
-		getStorage("popover-display") === "",
+		getStorage("popover-displayed", "false") === "false",
 	);
 	const [closingAnimation, setClosingAnimation] = useState(false);
 	const [disableControl, setDisableControl] = useState(false);
 	const [disableSendButton, setDisableSendButton] = useState(true);
+
+	const setChats = (newChats: Chat[]) => {
+		setStorage("chats", JSON.stringify(newChats));
+		setChatsRaw(newChats);
+	};
 
 	const setDisplayChat = (value: boolean) => {
 		if (value) {
@@ -40,10 +47,10 @@ function App(props: { className: string }) {
 				// so we remember this information in the client's local storage
 				// so that next time he faces the main button, no popover is visible
 				setDisplayPopover(false);
-				setStorage("popover-display", "true");
+				setStorage("popover-displayed", "true");
 			}
 		}
-
+		setStorage("chat-displayed", value.toString());
 		setDisplayChatRaw(value);
 	};
 
@@ -141,9 +148,12 @@ function App(props: { className: string }) {
 			className={
 				(closingAnimation
 					? "app-container-collapsed"
-					: displayChat
-					  ? "app-container-expanded"
-					  : "") +
+					: getStorage("chat-displayed", "false") === "true" &&
+					    !displayChat
+					  ? "app-container-already-opened"
+					  : displayChat
+					    ? "app-container-expanded"
+					    : "") +
 				" " +
 				props.className
 			}>
@@ -167,7 +177,13 @@ function App(props: { className: string }) {
 							<WingmanContext.Provider
 								value={waitingWingmanResponse}>
 								<Presenter
-									active={displayChat}
+									active={
+										displayChat ||
+										getStorage(
+											"chat-displayed",
+											"false",
+										) === "true"
+									}
 									button={
 										<MainButton
 											onClick={mainButtonOnClick}
