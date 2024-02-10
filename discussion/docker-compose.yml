@@ -9,7 +9,7 @@ services:
       args:
         - BACKEND_PATH=${BACKEND_PATH}
     ports:
-      - "7080:80"
+      - "10001:80"
     networks: 
       - proxynet
 networks:
