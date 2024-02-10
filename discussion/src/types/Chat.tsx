@@ -1,6 +1,6 @@
 import { WingmanMessage } from "./WingmanMessage";
 
-export type ChatSetter = React.Dispatch<React.SetStateAction<Chat[]>>;
+export type ChatSetter = any;
 
 export type Chat = {
 	message: WingmanMessage;

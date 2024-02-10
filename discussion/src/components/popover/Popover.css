@@ -17,7 +17,7 @@
 }
 
 .popover-none {
-	opacity: 0 !important;
+	animation: none !important;
 }
 
 .popover-container::after {
