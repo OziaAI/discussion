@@ -28,6 +28,12 @@
 	outline: none;
 }
 
+#chatboard-input:focus-visible {
+	outline: none !important;
+	outline-offset: unset !important;
+	box-shadow: none !important;
+}
+
 .chatboard-control-form:focus-within {
 	box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
