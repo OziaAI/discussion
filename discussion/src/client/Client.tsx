@@ -22,19 +22,9 @@ export class Client {
 		if (this.socket === null) return;
 		if (message === "" || message === undefined) return;
 
-		const {
-			host,
-			hostname,
-			href,
-			origin,
-			pathname,
-			port,
-			protocol,
-			search,
-		} = window.location;
+		const origin = window.location.origin;
 
 		let shop_url = origin.split("//")[1];
-		shop_url = "ozia-toy.myshopify.com";
 
 		this.socket.send(
 			JSON.stringify({ message: message, shop_url: shop_url }),
