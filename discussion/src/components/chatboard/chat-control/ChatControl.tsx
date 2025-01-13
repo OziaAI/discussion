@@ -8,7 +8,7 @@ import robot from "../../../images/logo32.png";
 
 function ChatControl(props: { onChangeMessage: React.ChangeEventHandler }) {
 	const onSend: Function = useContext(SendMessageContext);
-        // eslint-disable-next-line
+	// eslint-disable-next-line
 	const [disableControl, disableSendButton, setDisableControl] =
 		useContext(ControlContext);
 	const onSubmit = (e: FormEvent) => {

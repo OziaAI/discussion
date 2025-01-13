@@ -90,7 +90,11 @@ function App(props: { className: string }) {
 
 	const cleanse = (chat: Chat[]): Chat[] => {
 		if (chat.length === 0) return [];
-		chat[chat.length - 1].message.option = null;
+		let c: Chat = chat[chat.length - 1];
+		if (c.message.option !== null) {
+			c.message.option.acceptAction = null;
+			c.message.option.denyAction = null;
+		}
 		return chat;
 	};
 
@@ -149,14 +153,15 @@ function App(props: { className: string }) {
 				(closingAnimation
 					? "app-container-collapsed"
 					: getStorage("chat-displayed", "false") === "true" &&
-					    !displayChat
-					  ? "app-container-already-opened"
-					  : displayChat
-					    ? "app-container-expanded"
-					    : "") +
+						  !displayChat
+						? "app-container-already-opened"
+						: displayChat
+							? "app-container-expanded"
+							: "") +
 				" " +
 				props.className
-			}>
+			}
+		>
 			{!displayChat ? (
 				<Popover className={!displayPopover ? "popover-none" : ""}>
 					Hello there! 👋
@@ -170,12 +175,15 @@ function App(props: { className: string }) {
 						disableControl,
 						disableSendButton,
 						controlDiscussion,
-					]}>
+					]}
+				>
 					<DisplayContext.Provider
-						value={[displayChat, controlDisplayChat]}>
+						value={[displayChat, controlDisplayChat]}
+					>
 						<SendMessageContext.Provider value={sendMessage}>
 							<WingmanContext.Provider
-								value={waitingWingmanResponse}>
+								value={waitingWingmanResponse}
+							>
 								<Presenter
 									active={
 										displayChat ||
@@ -189,7 +197,8 @@ function App(props: { className: string }) {
 											onClick={mainButtonOnClick}
 											displayChat={displayChat}
 										/>
-									}>
+									}
+								>
 									<Chatboard
 										onCloseClick={closeButtonOnClick}
 										onChangeMessage={onChangeMessage}

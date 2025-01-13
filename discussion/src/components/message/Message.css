@@ -9,6 +9,19 @@
 	font-size: 15px;
 }
 
+.message-wrapped {
+}
+
+.message-container-padded {
+	margin-bottom: var(--padding-size-1);
+}
+
+.embed-image {
+	height: 150px;
+	width: auto;
+	margin-left: calc(30px + var(--padding-size-1));
+}
+
 .message-sent {
 	border-top-left-radius: 15px;
 	border-top-right-radius: 15px;
@@ -41,7 +54,6 @@
 .message-container {
 	display: flex;
 	align-items: flex-end;
-	margin-bottom: var(--padding-size-1);
 }
 
 .message-container-sent {

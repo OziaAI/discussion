@@ -22,7 +22,23 @@ export class Client {
 		if (this.socket === null) return;
 		if (message === "" || message === undefined) return;
 
-		this.socket.send(JSON.stringify({ message: message }));
+		const {
+			host,
+			hostname,
+			href,
+			origin,
+			pathname,
+			port,
+			protocol,
+			search,
+		} = window.location;
+
+		let shop_url = origin.split("//")[1];
+		shop_url = "ozia-toy.myshopify.com";
+
+		this.socket.send(
+			JSON.stringify({ message: message, shop_url: shop_url }),
+		);
 		const wingmanMessage: WingmanMessage = {
 			message: message,
 			option: null,

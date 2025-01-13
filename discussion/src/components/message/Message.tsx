@@ -15,7 +15,7 @@ function Message(props: {
 	isLast: boolean;
 }) {
 	const onSend: Function = useContext(SendMessageContext);
-        // eslint-disable-next-line
+	// eslint-disable-next-line
 	const [disableControl, disableSendButton, controlDiscussion] =
 		useContext(ControlContext);
 	const messageOption = () => {
@@ -53,38 +53,59 @@ function Message(props: {
 		);
 	};
 
+	const displayEmbed = () => {
+		let option: WingmanMessageOption | null = props.message.option;
+		if (option === null) return <></>;
+		if (option?.embeddedUrl !== null && option?.embeddedUrl !== "")
+			return (
+				<img
+					className="embed-image message-received"
+					src={option?.embeddedUrl}
+					alt=""
+				/>
+			);
+
+		return <></>;
+	};
+
 	return (
 		<div className="message-padder">
-			<div
-				className={
-					"message-container " +
-					(!props.sentMessage
-						? "message-container-received"
-						: "message-container-sent")
-				}
-			>
+			<div className="message-wrapped">
 				<div
 					className={
-						"message-text " +
-						(props.sentMessage
-							? "message-sent"
-							: "message-received")
+						"message-container " +
+						(!props.message.option?.embeddedUrl
+							? "message-container-padded "
+							: "") +
+						(!props.sentMessage
+							? "message-container-received"
+							: "message-container-sent")
 					}
 				>
-					<span className="message-content">
-						{props.message.message}
-					</span>
+					<div
+						className={
+							"message-text " +
+							(props.sentMessage
+								? "message-sent"
+								: "message-received")
+						}
+					>
+						<span className="message-content">
+							{props.message.message}
+						</span>
+					</div>
+					<img
+						src={props.sentMessage ? profile : robot}
+						alt="profile pic"
+						className={
+							"message-image " +
+							(props.sentMessage
+								? "message-image-me"
+								: "message-image-them")
+						}
+					></img>
 				</div>
-				<img
-					src={props.sentMessage ? profile : robot}
-					alt="profile pic"
-					className={
-						"message-image " +
-						(props.sentMessage
-							? "message-image-me"
-							: "message-image-them")
-					}
-				></img>
+				{displayEmbed()}
 			</div>
 			{messageOption()}
 			{disableControl || props.message.context.disconnect ? (
